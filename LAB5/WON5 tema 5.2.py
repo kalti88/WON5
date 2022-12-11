@@ -6,7 +6,7 @@ def schimb_nota(elev, nota, overwrite=False):
             else:
                 catalog[elev].append(nota)
         else:
-            print('Nu exista aceasta nota.')
+            print('Nu exista nici aceasta nota.')
     else:
         print('Acest nume nu exista in catalog.')
 
