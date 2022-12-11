@@ -1,0 +1,8 @@
+Nume                     Prenume                         Media        Note
+__________________________________________________________________________
+Popescu                  Ion                              3.00           3
+Ionescu                  Geta                             8.25           4
+Georgescu                Gelu                             3.00           2
+Radulescu                Ioana                            6.80           5
+Vasilescu                Vasile                           8.50           4
+Bengescu                 Hortensia                        9.00           4
