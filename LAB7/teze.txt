@@ -1,0 +1,6 @@
+Popescu Ion;4
+Ionescu Geta;8
+Georgescu Gelu;5
+Radulescu Ioana;7
+Vasilescu Vasile;9
+Bengescu Hortensia;9
