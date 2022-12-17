@@ -1,6 +1,32 @@
 import statistics
 
 
+def media(t):
+    """Calculeaza media numerelor din tupla.
+
+    Parameters
+    ----------
+    t: tuple
+        Tupla cu cel putin un numar intreg.
+
+    Returns
+    -------
+    float:
+        Media numerelor din tupla.
+
+    Example usage:
+    >>> media((5, 6, 20, 21))
+    13.0
+    >>> media((50, 150, 500, 1000))
+    425.0
+    """
+    tot = 0
+    for i in t:
+        tot += i
+    media = tot / len(t)
+    return media
+
+
 def import_data_create_catalog(filename: str):
     """Importa datele pentru crearea catalogului cu medii
 
@@ -44,9 +70,10 @@ def premianti_3(c: dict):
     list
         "Lista cu cei 3 premianti.
 
-    # Example usage:
-    # >>>premianti_3({'Popescu Ion': 3, 'Ionescu Geta': 8.25, 'Georgescu Gelu': 3, 'Radulescu Ioana': 6.8, 'Vasilescu Vasile': 8.5, 'Bengescu Hortensia': 9})
-    # [(9, 'Bengescu Hortensia'), (8.5, 'Vasilescu Vasile'), (8.25, 'Ionescu Geta')]
+    Example usage:
+    >>> premianti_3({'Popescu Ion': 3, 'Ionescu Geta': 8.25, 'Georgescu Gelu': 3, 'Radulescu Ioana': 6.8, \
+'Vasilescu Vasile': 8.5, 'Bengescu Hortensia': 9})
+    [(9, 'Bengescu Hortensia'), (8.5, 'Vasilescu Vasile'), (8.25, 'Ionescu Geta')]
     """
     lista_p = []
     for e in c:
