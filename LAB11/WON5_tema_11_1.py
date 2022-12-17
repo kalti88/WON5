@@ -16,7 +16,8 @@ def import_data_create_catalog(filename: str):
 
     Example usage:
     >>> import_data_create_catalog('note.txt')
-    {'Popescu Ion': 3, 'Ionescu Geta': 8.25, 'Georgescu Gelu': 3, 'Radulescu Ioana': 6.8, 'Vasilescu Vasile': 8.5, 'Bengescu Hortensia': 9}
+    {'Popescu Ion': 3, 'Ionescu Geta': 8.25, 'Georgescu Gelu': 3, 'Radulescu Ioana': 6.8, 'Vasilescu Vasile': 8.5, \
+'Bengescu Hortensia': 9}
     """
     catalog = {}
     with open(filename, 'r') as file:
@@ -42,6 +43,10 @@ def premianti_3(c: dict):
     -------
     list
         "Lista cu cei 3 premianti.
+
+    # Example usage:
+    # >>>premianti_3({'Popescu Ion': 3, 'Ionescu Geta': 8.25, 'Georgescu Gelu': 3, 'Radulescu Ioana': 6.8, 'Vasilescu Vasile': 8.5, 'Bengescu Hortensia': 9})
+    # [(9, 'Bengescu Hortensia'), (8.5, 'Vasilescu Vasile'), (8.25, 'Ionescu Geta')]
     """
     lista_p = []
     for e in c:
