@@ -23,8 +23,8 @@ def media(t):
     tot = 0
     for i in t:
         tot += i
-    media = tot / len(t)
-    return media
+    med = tot / len(t)
+    return med
 
 
 def import_data_create_catalog(filename: str):
@@ -84,5 +84,5 @@ def premianti_3(c: dict):
 
 if __name__ == '__main__':
     from doctest import testmod
-    #testmod()
+    # testmod()
     testmod(verbose=True)
