@@ -6,4 +6,4 @@ for roots, dirs, files in os.walk(address):
     for f in files:
         total += os.path.getsize(f'{roots}/{f}')
 print(address)
-print('Total file size {} Megabytes'.format(total/(1024**2)))
+print('Total file size {} Megabytes'.format(f'{total/(1024**2):.2f}'))
