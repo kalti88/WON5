@@ -2,7 +2,7 @@ import os
 
 count_py = 0
 address = 'C:/Users/Zsolt/PycharmProjects/PITHON_WON5'
-for roots, dirs, files in os.walk(address):
+for root, dirs, files in os.walk(address):
     for f in files:
         ext = f.split('.')[-1].lower()
         if ext == 'py':
