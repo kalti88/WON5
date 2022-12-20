@@ -19,4 +19,4 @@ def total_size(address):
 address = 'C:/Users/Zsolt/PycharmProjects/PITHON_WON5/'
 total = total_size(address)
 print(address)
-print('Total file size {} Megabytes'.format(f'{total/(1024**2):.2f}'))
+print('Total file size {} Kilobytes'.format(f'{total/(1024):,.2f}'))

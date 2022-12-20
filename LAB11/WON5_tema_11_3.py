@@ -1,7 +1,7 @@
 import os
 
 count_py = 0
-address = 'C:/Users/Zsolt/PycharmProjects/PITHON_WON5'
+address = 'C:/Python/WON5'
 for root, dirs, files in os.walk(address):
     for f in files:
         ext = f.split('.')[-1].lower()
