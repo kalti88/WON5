@@ -7,5 +7,5 @@ for root, dirs, files in os.walk(address):
         ext = f.split('.')[-1].lower()
         if ext == 'py':
             count_py += 1
-            print(f'{roots}/{f}')
+            print(f'{root}/{f}')
 print('Nr. Python files {}'.format(count_py))
