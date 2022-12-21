@@ -15,5 +15,5 @@ y = float(input('Inrodu valoarea coordonatei y!'))
 
 p1 = Point(x, y)
 
-print('Distanta de la punctul de la origine {}'.format(p1.get_distance()))
+print('Distanta de la punct la origine {}'.format(p1.get_distance()))
 
