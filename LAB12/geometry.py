@@ -7,4 +7,4 @@ class Point:
 
     def get_distance(self):
         distance = (self.x ** 2 + self.y ** 2) ** 0.5
-        return f'{distance:,.2f}'
+        return distance
