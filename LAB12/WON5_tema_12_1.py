@@ -10,10 +10,10 @@ class Point:
         return distance
 
 
-x = float(input('Inrodu valoarea coordonatei x!'))
-y = float(input('Inrodu valoarea coordonatei y!'))
+x = float(input('Introdu valoarea coordonatei x!'))
+y = float(input('Introdu valoarea coordonatei y!'))
 
 p1 = Point(x, y)
 
-print('Distanta de la punct la origine {}'.format(f'{p1.get_distance():,.2f}'))
+print(f'Distanta de la punct la origine {p1.get_distance():26,.2f}')
 
