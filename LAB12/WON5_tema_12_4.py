@@ -7,5 +7,5 @@ raza = float(input('Inrodu valoarea razei cercului!'))
 C = Circle(x, y, raza)
 
 print(f'Aria cercului este {C.get_area():,.2f}')
-print('Distanta cercului de la centru este {}'.format(C.get_distance()))
+print(f'Distanta cercului de la centru este {C.get_distance():,.2f}')
 
