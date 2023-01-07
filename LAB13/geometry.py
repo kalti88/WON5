@@ -14,6 +14,13 @@ class Point:
         self.y = y
 
 
+class Circle(Point):
+
+    def __init__(self, x, y, raza: float):
+        super().__init__(x, y)
+        self.raza = raza
+
+
 class Rectangle:
 
     def __init__(self, p1, p2):
