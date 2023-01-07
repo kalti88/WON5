@@ -77,3 +77,18 @@ class Rectangle:
         maxy = max(self.p1.y, self.p2.y)
 
         return minx <= p.x <= maxx and miny <= p.y <= maxy
+
+    def check_circle_in_rectangle(self, c):
+        """
+        Verify if the circle is inside the rectangle
+        :param c: The point to verify
+        :type c: Circle
+        :return: True or False
+        :rtype: Boolean
+        """
+        minx = min(self.p1.x, self.p2.x)
+        maxx = max(self.p1.x, self.p2.x)
+        miny = min(self.p1.y, self.p2.y)
+        maxy = max(self.p1.y, self.p2.y)
+
+        return minx <= (c.x - c.raza) and (c.x + c.raza) <= maxx and miny <= (c.y - c.raza) and (c.y + c.raza) <= maxy
