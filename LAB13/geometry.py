@@ -55,3 +55,18 @@ class Rectangle:
         """
         prm = abs((self.p1.x - self.p2.x) + (self.p1.y - self.p2.y)) * 2
         return prm
+
+    def check_point_in_rectangle(self, p):
+        """
+        Verify if the point is inside the rectangle
+        :param p: The point to verify
+        :type p: Point
+        :return: True or False
+        :rtype: Boolean
+        """
+        minx = min(self.p1.x, self.p2.x)
+        maxx = max(self.p1.x, self.p2.x)
+        miny = min(self.p1.y, self.p2.y)
+        maxy = max(self.p1.y, self.p2.y)
+
+        return minx <= p.x <= maxx and miny <= p.y <= maxy
