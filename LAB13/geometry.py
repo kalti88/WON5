@@ -71,7 +71,7 @@ class Rectangle:
         Calculate the perimeter of a rectangle.
         :return: The perimeter
         """
-        prm = abs((self.p1.x - self.p2.x) + (self.p1.y - self.p2.y)) * 2
+        prm = (abs(self.p1.x - self.p2.x) + abs(self.p1.y - self.p2.y)) * 2
         return prm
 
     def check_point_in_rectangle(self, p):
