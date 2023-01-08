@@ -17,6 +17,17 @@ class Point:
 class Circle(Point):
 
     def __init__(self, x, y, raza: float):
+        """
+        Constructor of Circle
+        :param x: x-axis coordinate
+        :type x: float
+        :param y: y-axis coordinate
+        :type y: float
+        :param raza: Circle radius value
+        :type raza: float
+
+        :return: object
+        """
         super().__init__(x, y)
         self.raza = raza
 
