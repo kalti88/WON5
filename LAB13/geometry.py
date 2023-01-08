@@ -92,3 +92,9 @@ class Rectangle:
         maxy = max(self.p1.y, self.p2.y)
 
         return minx <= (c.x - c.raza) and (c.x + c.raza) <= maxx and miny <= (c.y - c.raza) and (c.y + c.raza) <= maxy
+
+    def __eq__(self, other):
+        return (min(self.length_of_sides()), max(self.length_of_sides())) == (min(other.length_of_sides()), max(other.length_of_sides()))
+
+
+
