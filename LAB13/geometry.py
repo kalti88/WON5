@@ -56,7 +56,7 @@ class Rectangle:
         """
         lx = abs(self.p1.x - self.p2.x)
         ly = abs(self.p1.y - self.p2.y)
-        return lx, ly
+        return [lx, ly]
 
     def rectangle_area(self):
         """

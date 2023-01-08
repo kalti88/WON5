@@ -13,7 +13,7 @@ p1 = Point(x1, y1)
 p2 = Point(x2, y2)
 
 R = Rectangle(p1, p2)
-l1, l2 = R.length_of_sides()
+[l1, l2] = R.length_of_sides()
 prm = R.rectangle_perimeter()
 area = R.rectangle_area()
 
