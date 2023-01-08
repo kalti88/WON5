@@ -63,16 +63,14 @@ class Rectangle:
         Calculate the area of a rectangle.
         :return: The area
         """
-        area = abs((self.p1.x - self.p2.x) * (self.p1.y - self.p2.y))
-        return area
+        return abs((self.p1.x - self.p2.x) * (self.p1.y - self.p2.y))
 
     def rectangle_perimeter(self):
         """
         Calculate the perimeter of a rectangle.
         :return: The perimeter
         """
-        prm = (abs(self.p1.x - self.p2.x) + abs(self.p1.y - self.p2.y)) * 2
-        return prm
+        return (abs(self.p1.x - self.p2.x) + abs(self.p1.y - self.p2.y)) * 2
 
     def check_point_in_rectangle(self, p):
         """
