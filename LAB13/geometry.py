@@ -62,6 +62,7 @@ class Rectangle:
         """
         Calculate the area of a rectangle.
         :return: The area
+        :rtype: float
         """
         return abs((self.p1.x - self.p2.x) * (self.p1.y - self.p2.y))
 
@@ -69,6 +70,7 @@ class Rectangle:
         """
         Calculate the perimeter of a rectangle.
         :return: The perimeter
+        :rtype: float
         """
         return (abs(self.p1.x - self.p2.x) + abs(self.p1.y - self.p2.y)) * 2
 
