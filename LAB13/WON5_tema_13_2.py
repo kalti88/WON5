@@ -6,7 +6,7 @@ def abs_val(x):
     :return: Absolute value for x
     :rtype: float
     """
-    return (0 - x) if x < 0 else x
+    return -x if x < 0 else x
 
 
 x = float(input('Introdu numarul'))
