@@ -104,6 +104,22 @@ class Rectangle:
 
         return minx <= (c.x - c.raza) and (c.x + c.raza) <= maxx and miny <= (c.y - c.raza) and (c.y + c.raza) <= maxy
 
+    def check_element_in_rectangle(self, e):
+        """
+        Verify if the element is inside the rectangle
+        :param e: The point to verify
+        :return: True or False
+        :rtype: Boolean
+        """
+        minx = min(self.p1.x, self.p2.x)
+        maxx = max(self.p1.x, self.p2.x)
+        miny = min(self.p1.y, self.p2.y)
+        maxy = max(self.p1.y, self.p2.y)
+        if type(e) == Point:
+            return minx <= e.x <= maxx and miny <= e.y <= maxy
+        elif type(e) == Circle:
+            return minx <= (e.x - e.raza) and (e.x + e.raza) <= maxx and miny <= (e.y - e.raza) and (e.y + e.raza) <= maxy
+
     def __eq__(self, other):
         return (min(self.length_of_sides()), max(self.length_of_sides())) == (min(other.length_of_sides()), max(other.length_of_sides()))
 
