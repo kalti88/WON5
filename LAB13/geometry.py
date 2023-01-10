@@ -56,7 +56,7 @@ class Rectangle:
         """
         lx = abs(self.p1.x - self.p2.x)
         ly = abs(self.p1.y - self.p2.y)
-        return [lx, ly]
+        return sorted([lx, ly])
 
     def rectangle_area(self):
         """
@@ -121,7 +121,8 @@ class Rectangle:
             return minx <= (e.x - e.raza) and (e.x + e.raza) <= maxx and miny <= (e.y - e.raza) and (e.y + e.raza) <= maxy
 
     def __eq__(self, other):
-        return (min(self.length_of_sides()), max(self.length_of_sides())) == (min(other.length_of_sides()), max(other.length_of_sides()))
+        return self.length_of_sides() == other.length_of_sides()
+            #(min(self.length_of_sides()), max(self.length_of_sides())) == (min(other.length_of_sides()), max(other.length_of_sides()))
 
 
 
