@@ -127,5 +127,13 @@ class Rectangle:
     def __str__(self):
         return f'Rectangle(Point({self.p1.x}, {self.p1.y}), Point({self.p2.x}, {self.p2.y}))'
 
+    def check_square(self):
+        """
+        Check if the rectangle is a square too.
+        :return:
+        :rtype: Boolean
+        """
+        return self.length_of_sides()[0] == self.length_of_sides()[1]
+
 
 
