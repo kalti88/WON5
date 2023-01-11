@@ -13,6 +13,12 @@ class Point:
         self.x = x
         self.y = y
 
+    def __str__(self):
+        return f'Point({self.x}, {self.y})'
+
+    def __repr__(self):
+        return f'Point({self.x}, {self.y})'
+
 
 class Circle(Point):
 
@@ -118,7 +124,8 @@ class Rectangle:
         if type(e) == Point:
             return minx <= e.x <= maxx and miny <= e.y <= maxy
         elif type(e) == Circle:
-            return minx <= (e.x - e.raza) and (e.x + e.raza) <= maxx and miny <= (e.y - e.raza) and (e.y + e.raza) <= maxy
+            return minx <= (e.x - e.raza) and (e.x + e.raza) <= maxx and miny <= (e.y - e.raza) and (
+                        e.y + e.raza) <= maxy
 
     def __eq__(self, other):
         return self.length_of_sides() == other.length_of_sides()
@@ -136,4 +143,23 @@ class Rectangle:
         return self.length_of_sides()[0] == self.length_of_sides()[1]
 
 
+class Polyline:
 
+    def __new__(cls, *args):
+        return super().__new__(cls)
+
+    list_points = []
+
+    def __int__(self, point):
+        """
+        Creator of Polyline
+        :param args: list of Points
+        :type args: list
+        :return: Object Polyline
+        :rtype: Polyline
+        """
+        self.point = point
+        list_points
+
+    def __str__(self, *args):
+        return f'Polyline({args})'
