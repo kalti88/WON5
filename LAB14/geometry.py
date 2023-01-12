@@ -40,6 +40,9 @@ class Circle(Point):
 
 class Rectangle:
 
+    square_instances = 0
+    instances = 0
+
     def __init__(self, p1, p2):
         """
         Define a rectangle
@@ -52,6 +55,7 @@ class Rectangle:
         """
         self.p1 = p1
         self.p2 = p2
+        Rectangle.instances += 1
 
     def length_of_sides(self):
         """
@@ -140,7 +144,13 @@ class Rectangle:
         :return:
         :rtype: Boolean
         """
+        if self.length_of_sides()[0] == self.length_of_sides()[1]:
+            Rectangle.square_instances += 1
         return self.length_of_sides()[0] == self.length_of_sides()[1]
+
+    @staticmethod
+    def get_square_percent():
+        return f'The percentage of squares from rectangles is {(Rectangle.square_instances / Rectangle.instances) *100:.2f}%'
 
 
 class Polyline:
