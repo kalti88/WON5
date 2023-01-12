@@ -125,7 +125,7 @@ class Rectangle:
             return minx <= e.x <= maxx and miny <= e.y <= maxy
         elif type(e) == Circle:
             return minx <= (e.x - e.raza) and (e.x + e.raza) <= maxx and miny <= (e.y - e.raza) and (
-                        e.y + e.raza) <= maxy
+                    e.y + e.raza) <= maxy
 
     def __eq__(self, other):
         return self.length_of_sides() == other.length_of_sides()
@@ -144,22 +144,16 @@ class Rectangle:
 
 
 class Polyline:
-
-    def __new__(cls, *args):
-        return super().__new__(cls)
-
-    list_points = []
-
-    def __int__(self, point):
+    def __init__(self, *args):
         """
-        Creator of Polyline
-        :param args: list of Points
-        :type args: list
-        :return: Object Polyline
+        Constructor of Polyline
+        :param args: List of points
+        :type: Point
+        :return: Polyline
         :rtype: Polyline
         """
-        self.point = point
-        list_points
+        self.points = args
 
-    def __str__(self, *args):
-        return f'Polyline({args})'
+    def __str__(self):
+        return f'{type(self).__name__}{self.points}'
+

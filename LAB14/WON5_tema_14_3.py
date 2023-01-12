@@ -12,7 +12,5 @@ while ctrl == 'y' or ctrl == 'Y':
     ctrl = input('Vrei sa continui? y/n')
 
 
-# print(Point(x, y))
-# print(list_points)
-print(Polyline(list_points))
+print(Polyline(*list_points))
 
