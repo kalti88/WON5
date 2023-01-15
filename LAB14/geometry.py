@@ -55,7 +55,10 @@ class Rectangle:
         """
         self.p1 = p1
         self.p2 = p2
+
         Rectangle.instances += 1
+        if Rectangle.check_square(self):
+            Rectangle.square_instances += 1
 
     def length_of_sides(self):
         """
@@ -144,8 +147,6 @@ class Rectangle:
         :return:
         :rtype: Boolean
         """
-        if self.length_of_sides()[0] == self.length_of_sides()[1]:
-            Rectangle.square_instances += 1
         return self.length_of_sides()[0] == self.length_of_sides()[1]
 
     @staticmethod
@@ -168,7 +169,7 @@ class Polyline:
                 if type(i) != Point:
                     raise WrongGeometry()
         except WrongGeometry:
-            print('You ar trying to introduce a circle in the polyline. Make sure that introduce only "Point" classes.')
+            print('You ar trying to introduce an item different from "Point" in the polyline. Make sure to introduce only "Point" classes.')
 
     def __str__(self):
         return f'{type(self).__name__}{self.points}'

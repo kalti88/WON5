@@ -17,9 +17,4 @@ r2 = Rectangle(p21, p22)
 r3 = Rectangle(p31, p32)
 r4 = Rectangle(p41, p42)
 
-r1.check_square()
-r2.check_square()
-r3.check_square()
-r4.check_square()
-
 print(Rectangle.get_square_percent())
