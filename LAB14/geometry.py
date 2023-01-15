@@ -178,5 +178,3 @@ class Polyline:
 class WrongGeometry (Exception):
     def __init__(self):
         pass
-
-

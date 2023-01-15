@@ -13,4 +13,3 @@ while ctrl == 'y' or ctrl == 'Y':
 
 
 print(Polyline(*list_points))
-
