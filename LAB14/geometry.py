@@ -139,7 +139,7 @@ class Rectangle:
         # (min(self.length_of_sides()), max(self.length_of_sides())) == (min(other.length_of_sides()), max(other.length_of_sides()))
 
     def __str__(self):
-        return f'Rectangle(Point({self.p1.x}, {self.p1.y}), Point({self.p2.x}, {self.p2.y}))'
+        return f'Rectangle({self.p1}, {self.p2})'
 
     def check_square(self):
         """
