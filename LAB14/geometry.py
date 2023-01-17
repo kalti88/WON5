@@ -147,7 +147,8 @@ class Rectangle:
         :return:
         :rtype: Boolean
         """
-        return self.length_of_sides()[0] == self.length_of_sides()[1]
+        a = self.length_of_sides()
+        return a[0] == a[1]
 
     @staticmethod
     def get_square_percent():
