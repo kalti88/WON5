@@ -39,7 +39,6 @@ class Circle(Point):
 
 
 class Rectangle:
-
     square_instances = 0
     instances = 0
 
@@ -152,7 +151,7 @@ class Rectangle:
 
     @staticmethod
     def get_square_percent():
-        return f'The percentage of squares from rectangles is {(Rectangle.square_instances / Rectangle.instances) *100:.2f}%'
+        return f'The percentage of squares from rectangles is {(Rectangle.square_instances / Rectangle.instances) * 100:.2f}%'
 
 
 class Polyline:
@@ -166,15 +165,23 @@ class Polyline:
         """
         self.points = args
 
+        if len(args) < 2:
+            raise wrong_number_of_points('Not enough number of points')
+
         for i in args:
             if type(i) != Point:
-                raise WrongGeometry(f'You ar trying to introduce an item {type(i).__name__} from "Point" in the polyline. Make sure to introduce only "Point" classes.')
+                raise WrongGeometry(
+                    f'You ar trying to introduce an item {type(i).__name__} from "Point" in the polyline. Make sure to introduce only "Point" classes.')
 
     def __str__(self):
         return f'{type(self).__name__}{self.points}'
 
 
-class WrongGeometry (Exception):
+class WrongGeometry(Exception):
     pass
     # def __init__(self):
     #     pass
+
+
+class wrong_number_of_points(Exception):
+    pass
