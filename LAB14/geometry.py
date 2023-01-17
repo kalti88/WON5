@@ -165,17 +165,16 @@ class Polyline:
         :rtype: Polyline
         """
         self.points = args
-        try:
-            for i in args:
-                if type(i) != Point:
-                    raise WrongGeometry()
-        except WrongGeometry:
-            print('You ar trying to introduce an item different from "Point" in the polyline. Make sure to introduce only "Point" classes.')
+
+        for i in args:
+            if type(i) != Point:
+                raise WrongGeometry(f'You ar trying to introduce an item {type(i).__name__} from "Point" in the polyline. Make sure to introduce only "Point" classes.')
 
     def __str__(self):
         return f'{type(self).__name__}{self.points}'
 
 
 class WrongGeometry (Exception):
-    def __init__(self):
-        pass
+    pass
+    # def __init__(self):
+    #     pass
