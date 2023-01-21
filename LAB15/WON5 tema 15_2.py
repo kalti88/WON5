@@ -11,7 +11,6 @@ def import_data(filename: str):
     list:
             Returneaza o lista cu datele pentru coduri.
     """
-    lista = []
     with open(filename, 'r') as file:
         for i, line in enumerate(file):
             if i > 0:
