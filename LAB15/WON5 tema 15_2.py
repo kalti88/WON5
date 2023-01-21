@@ -17,7 +17,6 @@ def import_data(filename: str):
                 ln = line.strip().split(',')
                 print('insert into student (surname, first_name, class_nr, class_letter, birth_date, average_grade)')
                 print(f"    values ('{ln[0]}', '{ln[1]}', '{ln[2]}', '{ln[3]}', '{ln[4]}', '{ln[5]}');")
-                print('')
 
 
 import_data('student.csv')
