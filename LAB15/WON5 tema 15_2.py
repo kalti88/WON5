@@ -8,8 +8,8 @@ def import_data(filename: str):
 
     Returns
     -------
-    list:
-            Returneaza o lista cu datele pentru coduri.
+    None:
+            Listeaza datele pentru coduri.
     """
     with open(filename, 'r') as file:
         for i, line in enumerate(file):
