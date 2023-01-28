@@ -1,0 +1,14 @@
+---------------------------------------------
+Nume                Prenume             Clasa
+---------------------------------------------
+Ionescu             Gelu                   7a
+Lopez               Jennifer               5c
+Moldovan            Stefan                 5c
+Muresan             Ionel                  5c
+Popa                Ioana                  7a
+Popescu             Maria                  5c
+Radulescu           Ana-Maria              7a
+Rebengiuc           Victor                 7a
+Tanase              Ceorgeta               5c
+Todoran             Temistocle             7a
+---------------------------------------------
