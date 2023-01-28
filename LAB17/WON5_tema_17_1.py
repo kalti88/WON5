@@ -12,7 +12,7 @@ try:
                     student s
                 join 
                     school_class c on s.class_id = c.id
-                order by s.surname
+                order by s.surname;
             '''
     c.execute(query)
     school_table = c.fetchall()
