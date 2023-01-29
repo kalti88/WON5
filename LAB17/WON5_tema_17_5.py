@@ -23,28 +23,28 @@ try:
     all_subjects = [i[0] for i in all_subjects]
     # print(all_subjects)
 
-    for i in all_students_id:
-        for j in all_subjects:
-            query3 = f'''select
-                              g.grade
-                            from
-                                grades g
-                            where
-                                student_id = {i} and subject = '{j}';
-                        '''
-            c.execute(query3)
-            all_grades = c.fetchall()
-            if all_grades:
-                all_grades = [i[0] for i in all_grades]
-                val = (j, statistics.mean(all_grades), i)
-                c.execute("""insert into student_average (subject, average, student_id)
-                                values (%s, %s, %s)""", val)
-                conn.commit()
-            else:
-                val = (j, '0', i)
-                c.execute("""insert into student_average (subject, average, student_id)
-                                values (%s, %s, %s)""", val)
-                conn.commit()
+    # for i in all_students_id:
+    #     for j in all_subjects:
+    #         query3 = f'''select
+    #                           g.grade
+    #                         from
+    #                             grades g
+    #                         where
+    #                             student_id = {i} and subject = '{j}';
+    #                     '''
+    #         c.execute(query3)
+    #         all_grades = c.fetchall()
+    #         if all_grades:
+    #             all_grades = [i[0] for i in all_grades]
+    #             val = (j, statistics.mean(all_grades), i)
+    #             c.execute("""insert into student_average (subject, average, student_id)
+    #                             values (%s, %s, %s)""", val)
+    #             conn.commit()
+    #         else:
+    #             val = (j, '0', i)
+    #             c.execute("""insert into student_average (subject, average, student_id)
+    #                             values (%s, %s, %s)""", val)
+    #             conn.commit()
 
     query4 = f'''select
                       s.surname,
@@ -59,7 +59,10 @@ try:
                 '''
     c.execute(query4)
     table_average = c.fetchall()
-    print(table_average)
+    with open('student_average.txt', 'w') as av:
+        print(f'{"Surname":<20}{"First name":<20}{"Subject":<15}{"Average":>7}', file=av)
+        for i in table_average:
+            print(f'{i[0]:<20}{i[1]:<20}{i[2]:<15}{i[3]:>5.2f}', file=av)
     c.close()
 except psycopg2.OperationalError as ex:
     print('Database error:', ex)
