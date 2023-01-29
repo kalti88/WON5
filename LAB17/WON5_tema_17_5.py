@@ -37,14 +37,29 @@ try:
             if all_grades:
                 all_grades = [i[0] for i in all_grades]
                 val = (j, statistics.mean(all_grades), i)
-                c.execute("""insert into student_average (subject, average, student_id) 
+                c.execute("""insert into student_average (subject, average, student_id)
                                 values (%s, %s, %s)""", val)
                 conn.commit()
             else:
                 val = (j, '0', i)
-                c.execute("""insert into student_average (subject, average, student_id) 
+                c.execute("""insert into student_average (subject, average, student_id)
                                 values (%s, %s, %s)""", val)
                 conn.commit()
+
+    query4 = f'''select
+                      s.surname,
+                      s.first_name,
+                      a.subject,
+                      a.average
+                    from
+                        student_average a
+                    join
+                        student s on a.student_id = s.id
+                    order by subject asc, average desc;
+                '''
+    c.execute(query4)
+    table_average = c.fetchall()
+    print(table_average)
     c.close()
 except psycopg2.OperationalError as ex:
     print('Database error:', ex)
