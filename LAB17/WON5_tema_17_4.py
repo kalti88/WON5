@@ -45,18 +45,21 @@ try:
         for i in school_table:
             print(f'Materia {i[4]} din data de {i[6]} nota {i[5]}')
     else:
-        query2 = f'''select s.id                    
-                            from student s
-                            where surname = '{nume.capitalize()}' and first_name = '{prenume.capitalize()}';
-                            '''
+        query2 = f'''select 
+                            s.id,
+                            concat (c.class_nr, c.class_letter)                   
+                     from student s
+                     join
+                            school_class c on s.class_id = c.id
+                     where surname = '{nume.capitalize()}' and first_name = '{prenume.capitalize()}';
+                 '''
         c.execute(query2)
         student_id = c.fetchall()
         c.execute(query3)
         school_table = c.fetchall()
         print(f'Numar total de elevi cu acest nume:{all_students_same_name}\n {separator * 30}')
         for j in student_id:
-            class_student = (i[3] for i in school_table if i[1] == j[0])
-            print(f'Elevul/a cu numele {nume.capitalize()} {prenume.capitalize()} si ID-ul {j[0]} din clasa {class_student} are urmatoarele note:')
+            print(f'Elevul/a cu numele {nume.capitalize()} {prenume.capitalize()} si ID-ul {j[0]} din clasa {j[1]} are urmatoarele note:')
             for i in school_table:
                 if i[0] == j[0]:
                     print(f'Materia {i[4]} din data de {i[6]} nota {i[5]}')
