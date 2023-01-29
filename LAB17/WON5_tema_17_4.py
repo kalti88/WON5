@@ -55,7 +55,8 @@ try:
         school_table = c.fetchall()
         print(f'Numar total de elevi cu acest nume:{all_students_same_name}\n {separator * 30}')
         for j in student_id:
-            print(f'Elevul/a cu numele {nume.capitalize()} {prenume.capitalize()} si ID-ul {j[0]} din clasa {school_table[0][3]} are urmatoarele note:')
+            class_student = (i[3] for i in school_table if i[1] == j[0])
+            print(f'Elevul/a cu numele {nume.capitalize()} {prenume.capitalize()} si ID-ul {j[0]} din clasa {class_student} are urmatoarele note:')
             for i in school_table:
                 if i[0] == j[0]:
                     print(f'Materia {i[4]} din data de {i[6]} nota {i[5]}')
