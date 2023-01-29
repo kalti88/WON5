@@ -1,8 +1,8 @@
 import psycopg2
 conn = None
 
-nume = input('Introdu numele elevului penrtu cautare:')
-prenume = input('Introdu prenumele elevului penrtu cautare:')
+nume = input('Introdu numele elevului penrtu cautare:').lower()
+prenume = input('Introdu prenumele elevului penrtu cautare:').lower()
 separator = '-'
 
 try:
