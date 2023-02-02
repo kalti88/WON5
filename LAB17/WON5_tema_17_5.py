@@ -7,7 +7,7 @@ try:
                             user="postgres", password="Kaltidata22", options="-c search_path=school")
     c = conn.cursor()
 
-    query1 = f'''select (id)
+    query1 = f'''select id
                 from student s;
             '''
     c.execute(query1)
@@ -39,12 +39,11 @@ try:
                 val = (j, statistics.mean(all_grades), i)
                 c.execute("""insert into student_average (subject, average, student_id)
                                 values (%s, %s, %s)""", val)
-                conn.commit()
             else:
                 val = (j, '0', i)
                 c.execute("""insert into student_average (subject, average, student_id)
                                 values (%s, %s, %s)""", val)
-                conn.commit()
+            conn.commit()
 
     query4 = f'''select
                       s.surname,
