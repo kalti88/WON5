@@ -1,0 +1,7 @@
+input[type=text], input[type=password] {
+    width: 200px;
+}
+
+input[type=submit] {
+    width: 210px;
+}
