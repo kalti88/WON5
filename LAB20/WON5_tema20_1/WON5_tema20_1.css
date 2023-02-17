@@ -1,0 +1,16 @@
+input[type=text], input[type=password] {
+    width: 200px;
+    padding: 0.2em;
+    box-sizing: content-box;
+}
+
+input[type=checkbox] {
+    cursor:pointer;
+}
+
+input[type=submit] {
+    width: 200px;
+    cursor: pointer;
+    padding: 0.2em;
+    box-sizing: content-box;
+}
