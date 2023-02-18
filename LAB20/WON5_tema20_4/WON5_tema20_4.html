@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="WON5_tema20_4.css" />
+    <script src= "WON5_tema20_4.js"></script>
+    <title>IntCheck</title>
+</head>
+<body>
+  <form action="target_page" method="post" id="sign_in_form">
+    <table class="center">
+      <tr>
+          <th> <div id="header" >Create an account</div></th>
+      </tr>
+      <tr>
+          <td>
+             <input type="text" id="name" placeholder="Username" />
+          </td>
+      </tr>
+      <tr><td> <div id="answer_user"></div></td></tr>
+      <tr>
+          <td>
+             <input type="password" id="pass" placeholder="Password" />
+          </td>
+      </tr>
+      <tr>
+          <td> <div id="answer_pass"></div></td>
+      </tr>
+      <tr>
+          <td>
+             <input type="password" id="pass_repeat" placeholder="Repeat password" />
+          </td>
+      </tr>
+      <tr>
+          <td> <div id="answer_pass_repeat"></div></td>
+      </tr>
+      <tr>
+          <td>
+               <input type="checkbox" name="therm" id="check"> I agree with the terms and conditions<br>
+          </td>
+      </tr>
+      <tr>
+          <td> <div id="answer_check"></div></td>
+      </tr>
+      <tr>
+          <td>
+              <input type="button" id="valid" value="Create account" onclick="validation()" />
+          </td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

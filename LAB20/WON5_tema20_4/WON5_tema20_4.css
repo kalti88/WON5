@@ -1,0 +1,43 @@
+body {
+    background-color: #99FFCC;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    border-style: no;
+    width: 30vw;
+}
+#header {
+    text-align: center;
+    font-family: Candara;
+    font-size: 40px;
+}
+
+input[type=text], input[type=password] {
+    width: 200px;
+    padding: 0.2em;
+    box-sizing: content-box;
+}
+
+input[type=checkbox] {
+    cursor:pointer;
+}
+
+input[type=submit] {
+    width: 200px;
+    cursor: pointer;
+    padding: 0.2em;
+    box-sizing: content-box;
+}
+
+.color-red{
+    color: red;
+}
+
+table {
+    margin-top: 150px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+}
