@@ -1,5 +1,5 @@
 body {
-    background-color: #99FFCC;
+    background-color: #76ECA9;
 }
 
 .center {
@@ -12,23 +12,41 @@ body {
     text-align: center;
     font-family: Candara;
     font-size: 40px;
+    margin-bottom: 30px;
 }
 
 input[type=text], input[type=password] {
-    width: 200px;
+    width: 300px;
+    height: 40px;
     padding: 0.2em;
     box-sizing: content-box;
+    border-radius: 10px;
+    border-color: #76ECA9;
+    font-size: 15px;
 }
 
 input[type=checkbox] {
     cursor:pointer;
 }
 
-input[type=submit] {
-    width: 200px;
+label {
+    font-family: Candara;
+}
+
+input[type=button] {
+    width: 300px;
+    height: 40px;
     cursor: pointer;
     padding: 0.2em;
     box-sizing: content-box;
+    border-radius: 10px;
+    background-color: #76ECA9;
+    border-color: #76ECA9;
+    font-family: Candara;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 5px #000000;
 }
 
 .color-red{
@@ -40,4 +58,26 @@ table {
     background-color: white;
     border-radius: 20px;
     padding: 40px;
+}
+
+tr, td {
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+#answer_user {
+    font-family: Candara;
+}
+
+#answer_pass {
+    font-family: Candara;
+}
+
+#answer_pass_repeat {
+    font-family: Candara;
+}
+
+#answer_check {
+    font-family: Candara;
 }
