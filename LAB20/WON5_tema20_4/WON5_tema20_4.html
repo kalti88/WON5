@@ -7,7 +7,7 @@
     <title>IntCheck</title>
 </head>
 <body>
-  <form action="target_page" method="post" id="sign_in_form">
+  <form action="target_page" method="post" id="sign_in_form" onsubmit="return validation()">
     <table class="center">
       <tr>
           <th> <div id="header" >Create an Account</div></th>
@@ -17,14 +17,14 @@
              <input type="text" id="name" placeholder="Username" />
           </td>
       </tr>
-      <tr><td> <div id="answer_user"> </div></td></tr>
+      <tr><td> <div id="answer_user" class="color-red"> </div></td></tr>
       <tr>
           <td>
              <input type="password" id="pass" placeholder="Password" />
           </td>
       </tr>
       <tr>
-          <td> <div id="answer_pass"> </div></td>
+          <td> <div id="answer_pass" class="color-red"> </div></td>
       </tr>
       <tr>
           <td>
@@ -44,7 +44,7 @@
       </tr>
       <tr>
           <td>
-              <input type="button" id="valid" value="Create account" onclick="validation()" />
+              <input type="submit" id="valid" value="Create account"/>
           </td>
       </tr>
     </table>
