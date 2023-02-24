@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-    <div class="title">Under construction</div>
-    <div class="loader"></div>
+    <table class="base">
+        <tr>
+            <td class="td_pic">
+                <img src="{{ url_for('static', filename='uc.png') }}" height="300" alt="Under construction">
+            </td>
+            <td>
+                <div class="title">Website under construction</div>
+                <div class="loader"></div>
+            </td>
+            <td class="td_pic">
+                <img src="{{ url_for('static', filename='uc.png') }}" height="300" alt="Under construction">
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
