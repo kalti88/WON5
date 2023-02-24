@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<header class="head">
+    <div class="div_head">Magic Install</div>
+    <div class="div_head_2">Instalatii apa si gaz de la prieteni</div>
+</header>
+<body>
+    <table class="base">
+        <tr>
+            <td class="menu"></td>
+            <td class="content">
+                <div class="title"> Despre noi</div>
+                <p class="text">MAGIC INSTALL SRL, înființată în anul 2004 și prezentă pe piața de instalații din Cluj-Napoca de aproape 20 de ani,
+                    este una din companiile de referință care s-a remarcat mereu prin profesionalism, zero compromisuri la calitate și, nu în ultimul rând,
+                    respect și implicare cu bun simț pentru clientul final.</p>
+                <p class="text">De la soluții simple, pentru case unifamiliale sau apartamente, la proiecte complexe de stat sau private, suntem aici pentru a furniza
+                    materialele de care dvs. aveți nevoie. Avem pe stoc peste 10.000 de produse care acoperă totul de la canalizare, gaz sau apă caldă și rece.</p>
+                <p class="text">Distribuție în județul Cluj. Livrăm materiale în orașele mari din județ de peste 15 ani.
+                    Rezultatele vorbesc de la sine – astăzi ne găsești în unul dintre cele mai mari depozite care gestionează exclusiv materiale pentru
+                    instalații sanitare și termice, pe strada Oasului nr. 22 din Cluj-Napoca.</p>
+                <p class="text"> Firma noastra are certificarea sistemului de management al calitatii –conform ISO 9001:2015, confirmand astfel mentinerea
+                    standardelor de calitate la cel mai inalt nivel.</p>
+            </td>
+            <td class="td_pic">
+                <img src="{{ url_for('static', filename='iso9001.png') }}" height="600" alt="Under construction">
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
