@@ -14,7 +14,7 @@
     <form action="target_page" method="post" id="sign_in_form" onsubmit="return validation()">
       <table class="center">
         <tr>
-            <th> <div id="header" >Formular de inregistrare</div></th>
+            <th> <div id="header" >Formular de contact</div></th>
         </tr>
         <tr>
             <td>
@@ -24,23 +24,21 @@
         <tr><td> <div id="answer_user" class="color-red"> </div></td></tr>
         <tr>
             <td>
-               <input type="password" id="pass" placeholder="Password" />
+               <input type="email" id="email" placeholder="E-mail" />
+            </td>
+        </tr>
+        <tr><td> <div id="answer_email" class="color-red"> </div></td></tr>
+        <tr>
+            <td>
+                <textarea id="text" placeholder="Your message here..." ></textarea>
             </td>
         </tr>
         <tr>
-            <td> <div id="answer_pass" class="color-red"> </div></td>
+            <td> <div id="answer_text" class="color-red"> </div></td>
         </tr>
         <tr>
             <td>
-               <input type="password" id="pass_repeat" placeholder="Repeat password" />
-            </td>
-        </tr>
-        <tr>
-            <td> <div id="answer_pass_repeat"> </div></td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" name="therm" id="check"><label> I agree with the terms and conditions</label><br>
+                <input type="checkbox" name="therm" id="check"><label> Accept termenii si conditiile</label><br>
             </td>
         </tr>
         <tr>
@@ -53,5 +51,10 @@
         </tr>
       </table>
   </form>
+<footer id="footer">
+    <p class="text">Adresa e-mail: magicinstall@megicinstall.ro</p>
+    <p class="text">Adresa: str. Oasului 22 Cluj Napoca</p>
+    <p class="text">Persoana de contact: Paul Pop</p>
+</footer>
 </body>
 </html>
