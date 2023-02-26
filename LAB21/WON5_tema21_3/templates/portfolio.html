@@ -3,20 +3,31 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Portfolio</title>
 </head>
+<header class="head">
+    <div class="div_head">Magic Install</div>
+    <div class="div_head_2">Instalatii apa si gaz de la prieteni</div>
+</header>
 <body>
     <table class="base">
         <tr>
-            <td class="td_pic">
-                <img src="{{ url_for('static', filename='uc.png') }}" height="300" alt="Under construction">
-            </td>
-            <td>
-                <div class="title">Coming soon</div>
-                <div class="loader"></div>
-            </td>
-            <td class="td_pic">
-                <img src="{{ url_for('static', filename='uc.png') }}" height="300" alt="Under construction">
+            <td class="menu"></td>
+            <td class="content">
+                <div class="title"> Portofoliu</div>
+                <div class="title2">Hotel WON5 - Guatemala</div>
+                <img class="portfolio" src="{{ url_for('static', filename='hotel.jpg') }}" alt="hotel">
+                <p class="under_photo">Compania noastra a fost implicanta in acest proiect instaland atat sistemele HVAC si cele sanitare. Hotelul se afla
+                    intr-o cladire S+P+7 si are o suprafata totala de 3.400 mp, compania noastra instaland 400 kW incalzire si 700 kW racire.</p>
+                <div class="title2">Complex rezidential WON5 - Romania</div>
+                <img class="portfolio" src="{{ url_for('static', filename='bloc.jpg') }}" alt="bloc">
+                <p class="under_photo">Acest complex rezidential se situeaza in zona centrala a Bucurestiului, si este compus din trei cladiri S+P+12, in total
+                    158 de apartamente. Magic Install a fost aleasa pentru a instala sistemele HVAC, sanitare si de stingere a incendiilor. Au fost instalati
+                    3.600 kW incalzire si 450 kW racire.</p>
+                <div class="title2">Centru logistic WON5 - Germania</div>
+                <img class="portfolio" src="{{ url_for('static', filename='centrucom.jpg') }}" alt="centru_com">
+                <p class="under_photo">Pentru centru logistic cu o suprafata de 16.000 de metri patrati lucrarile efectuate de compania noastra au inclus
+                    instalatiile HVAC si instalatiile sanitare. Compania noastra a instalat 180 kW incalzire.</p>
             </td>
         </tr>
     </table>
