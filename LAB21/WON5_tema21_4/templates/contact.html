@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+<script src="{{ url_for('static', filename='WON5_tema21_4.js') }}"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+</head>
+<header class="head">
+    <div class="div_head">Magic Install</div>
+    <div class="div_head_2">Instalatii apa si gaz de la prieteni</div>
+</header>
+<body>
+    <form action="target_page" method="post" id="sign_in_form" onsubmit="return validation()">
+      <table class="center">
+        <tr>
+            <th> <div id="header" >Formular de inregistrare</div></th>
+        </tr>
+        <tr>
+            <td>
+               <input type="text" id="name" placeholder="Username" />
+            </td>
+        </tr>
+        <tr><td> <div id="answer_user" class="color-red"> </div></td></tr>
+        <tr>
+            <td>
+               <input type="password" id="pass" placeholder="Password" />
+            </td>
+        </tr>
+        <tr>
+            <td> <div id="answer_pass" class="color-red"> </div></td>
+        </tr>
+        <tr>
+            <td>
+               <input type="password" id="pass_repeat" placeholder="Repeat password" />
+            </td>
+        </tr>
+        <tr>
+            <td> <div id="answer_pass_repeat"> </div></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="therm" id="check"><label> I agree with the terms and conditions</label><br>
+            </td>
+        </tr>
+        <tr>
+            <td> <div id="answer_check"> </div></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" id="valid" value="Create account"/>
+            </td>
+        </tr>
+      </table>
+  </form>
+</body>
+</html>
