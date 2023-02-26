@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
-<script src="{{ url_for('static', filename='WON5_tema21_4.js') }}"></script>
-<head>
-    <meta charset="UTF-8">
-    <title>Portfolio</title>
-</head>
+{% extends "layout.html" %}
+{% block content %}
 <body>
-<header class="head">
-    <div class="div_head">Magic Install</div>
-    <div class="div_head_2">Instalatii apa si gaz de la prieteni</div>
-</header>
     <form action="target_page" method="post" id="sign_in_form" onsubmit="return validation()">
       <table class="center">
         <tr>
@@ -51,10 +41,5 @@
         </tr>
       </table>
   </form>
-<footer id="footer">
-    <p class="text">Adresa e-mail: magicinstall@megicinstall.ro</p>
-    <p class="text">Adresa: str. Oasului 22 Cluj Napoca</p>
-    <p class="text">Persoana de contact: Paul Pop</p>
-</footer>
 </body>
-</html>
+{% endblock content %}

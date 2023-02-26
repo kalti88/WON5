@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+<script src="{{ url_for('static', filename='WON5_tema21_4.js') }}"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Magic install</title>
+</head>
+<body>
+<header class="head">
+    <table class="header">
+    <tr>
+        <td>
+            <div class="div_head">Magic Install</div>
+            <div class="div_head_2">Instalatii apa si gaz de la prieteni</div>
+        </td>
+        <td>
+            <button onclick="location.href='home'">Despre noi</button>
+        </td>
+        <td>
+            <button onclick="location.href='portfolio'">Portofoliu</button>
+        </td>
+        <td>
+            <button onclick="location.href='contact'">Contact</button>
+        </td>
+    </tr>
+    </table>
+</header>
+    {% block content %}{% endblock %}
+<footer id="footer">
+    <p class="text">Adresa e-mail: magicinstall@megicinstall.ro</p>
+    <p class="text">Adresa: str. Oasului 22 Cluj Napoca</p>
+    <p class="text">Persoana de contact: Paul Pop</p>
+</footer>
+</body>
+</html>
