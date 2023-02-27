@@ -1,17 +1,17 @@
 function valid_user() {
     let x = document.forms["sign_in_form"]["name"].value;
     if (x == "") {
-        alert(" Username must be filled out");
+        alert("  Numele trebuie completat");
         return false;
     }
     else {
         if (x.length < 4) {
-             alert (" Username must be at least 4 characters.");
+             alert (" Numele trebuie sa aiba minimum 4 caractere");
              return false;
         }
         else {
-            if  (x.length > 10) {
-                alert (" Username must be less then 10 characters.");
+            if  (x.length > 20) {
+                alert (" Numele trebuie sa aiba maximum 20 caractere");
                 return false;
             }
         }
@@ -22,7 +22,7 @@ function valid_user() {
 function valid_text() {
     let x = document.forms["sign_in_form"]["text"].value;
     if (x == "") {
-        alert(" Text must be filled out");
+        alert(" Scrie mesajul tau!");
         return false;
     }
     return true;
@@ -31,7 +31,7 @@ function valid_text() {
 
 function valid_check() {
     if (document.forms["sign_in_form"]["check"].checked == false) {
-        alert("Please agree to all the terms and conditions before create an account.");
+        alert("Trebuie sa accepti termenii si conditiile de utilizare");
         return false;
     }
     return true;
