@@ -11,7 +11,7 @@ def home():
 
 @app.route('/portfolio')
 def portfolio():
-    return render_template('portfolio.html')
+    return render_template('portfolio.html', title='Portofoliu')
 
 
 @app.route('/contact')
