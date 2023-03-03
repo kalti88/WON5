@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask('Students')
 
@@ -17,9 +17,9 @@ def students():
     return render_template('students.html', students=st)
 
 
-@app.route('/student/<student_id>/')
+@app.route('/students/<student_id>/')
 def show_student(student_id):
-    return render_template(f"/students/{st[student_id]}/")
+    return render_template(f"{student_id}.html", students=st, sid=student_id)
 
 
 if __name__ == '__main__':

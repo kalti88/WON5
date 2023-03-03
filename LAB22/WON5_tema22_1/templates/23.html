@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Students
+{% endblock %}
+
+{% block content %}
+    <div id="subtitle">Date elevi</div>
+    <table>
+        {% for k, i in students.items() %}
+            {% if sid == k %}
+                <tr>
+                    <th>Nume</th><td>{{students[i]['lname']}}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <hr>
+    <input type="text" placeholder="Search">
+    <input type="submit" name="Submit">
+{% endblock %}
