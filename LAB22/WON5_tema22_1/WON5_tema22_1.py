@@ -17,5 +17,10 @@ def students():
     return render_template('students.html', students=st)
 
 
+@app.route('/student/<student_id>/')
+def show_student(student_id):
+    return render_template(f"/students/{st[student_id]}/")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
