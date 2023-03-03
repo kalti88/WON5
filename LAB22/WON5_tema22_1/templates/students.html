@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+    <div id="title">Fastr Track IT</div>
+    <hr>
+    <div id="subtitle">Lista elevi</div>
+    <table>
+        <tr>
+            <th>Nume</th><th>Clasa</th>
+        </tr>
+        {% for sid in students %}
+            <tr>
+                <td><a href="/{{sid}}/">{{students[sid]['lname']}} {{students[sid]['fname']}}</a></td><td>{{students[sid]['class']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <input type="text" placeholder="Search">
+    <input type="submit" name="Submit">
+</body>
+</html>
