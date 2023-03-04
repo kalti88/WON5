@@ -10,6 +10,11 @@ st = {
     15: {'fname': 'Geta', 'lname': 'Ionescu', 'class': '9b'},
 }
 
+classes = []
+for i in st:
+    if st[i]['class'] not in classes:
+        classes.append(st[i]['class'])
+
 
 @app.route('/')
 @app.route('/students/')
@@ -20,6 +25,11 @@ def students():
 @app.route('/students/<student_id>/')
 def show_student(student_id):
     return render_template("student.html", students=st, sid=student_id)
+
+
+@app.route('/class/<class_name>/')
+def show_class(class_name):
+    return render_template("class.html", students=st, cl=class_name, all_cl=classes)
 
 
 if __name__ == '__main__':

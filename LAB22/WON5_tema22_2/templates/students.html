@@ -12,7 +12,8 @@
         </tr>
         {% for sid in students %}
             <tr>
-                <td><a href="/students/{{sid}}/">{{students[sid]['lname']}} {{students[sid]['fname']}}</a></td><td>{{students[sid]['class']}}</td>
+                <td><a href="/students/{{sid}}/">{{students[sid]['lname']}} {{students[sid]['fname']}}</a></td>
+                <td><a href="/class/{{students[sid]['class']}}/">{{students[sid]['class']}}</a></td>
             </tr>
         {% endfor %}
     </table>
