@@ -14,3 +14,7 @@ table, td, tr, th {
     font-weight: bold;
     font-size: 15px;
 }
+
+#stud {
+    text-align: left;
+}

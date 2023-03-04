@@ -19,7 +19,7 @@ def students():
 
 @app.route('/students/<student_id>/')
 def show_student(student_id):
-    return render_template(f"{student_id}.html", students=st, sid=student_id)
+    return render_template("student.html", students=st, sid=student_id)
 
 
 if __name__ == '__main__':

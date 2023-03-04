@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Students
+{% endblock %}
+
+{% block content %}
+    <div id="subtitle">Date elevi</div>
+    <table id="stud">
+        {% for k, i in students.items() %}
+            {% if k == (sid | int) %}
+                <tr>
+                    <th>Nume</th><td>{{students[k]['lname']}}</td>
+                </tr>
+                <tr>
+                    <th>Prenume</th><td>{{students[k]['fname']}}</td>
+                </tr>
+                <tr>
+                    <th>Clasa</th><td>{{students[k]['class']}}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <hr>
+    <a href="/students/">Lista elevi</a>
+{% endblock %}
