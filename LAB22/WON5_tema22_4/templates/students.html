@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Students
+{% endblock %}
+
+{% block content %}
+    <div id="subtitle">Lista elevi</div>
+    <table>
+        <tr>
+            <th>Nume</th><th>Clasa</th>
+        </tr>
+        {% for sid in students %}
+            <tr>
+                <td><a href="/students/grades/{{sid}}/">{{students[sid]['lname']}} {{students[sid]['fname']}}</a></td>
+                <td><a href="/class/{{students[sid]['class']}}/">{{students[sid]['class']}}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <form action="/search" method="GET">
+        <input type="text" name="search" placeholder="Search">
+        <input type="submit" name="Submit">
+    </form>
+{% endblock %}
