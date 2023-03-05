@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-app = Flask('Students2')
+app = Flask('Students')
 
 
 st = {
