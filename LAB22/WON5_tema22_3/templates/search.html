@@ -5,25 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    <div id="subtitle">Rezultate cautari</div>
-    {% set counter = 0 %}
+    <div id="subtitle">Rezultate cautarii</div>
+    {% set counter = [] %}
     {% for k, i in students.items() %}
         {% for j in i %}
             {% for s in search %}
-                {% if str.lower(i[j]) == s %}
-                    {{counter + 1 }}
-                    <table id="stud">
-                        <tr>
-                            <th>{{students[k]['lname']}} {{students[k]['fname']}}</th><td>{{students[k]['class']}}</td>
-                        </tr>
-                    </table>
-
+                {% if (i[j] | string()).lower() == s %}
+                    {% if k not in counter %}
+                        {% if counter.append(k) %}{% endif %}
+                    {% endif %}
                 {% endif %}
-            {% enfor %}
+            {% endfor %}
         {% endfor %}
     {% endfor %}
-    {% if counter = 0 %}
+    {% if counter == [] %}
         <div id="inex">Cautare fara succes</div>
+    {% else %}
+        {% for k in counter %}
+            <table id="stud">
+                <tr>
+                    <th class="search1">{{students[k]['lname']}} {{students[k]['fname']}}</th><td class="search2">{{students[k]['class']}}</td>
+                </tr>
+            </table>
+        {% endfor %}
     {% endif %}
     <hr>
     <a href="/students/">Lista elevi</a>

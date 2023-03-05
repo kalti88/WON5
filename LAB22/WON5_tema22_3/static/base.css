@@ -19,6 +19,17 @@ table, td, tr, th {
     text-align: left;
 }
 
+.search1 {
+    text-align: center;
+    width: 150px;
+
+}
+
+.search2 {
+    text-align: center;
+    width: 30px;
+}
+
 #inex {
     margin-top: 20px;
 }
