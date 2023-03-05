@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import statistics
 
 app = Flask('Students')
 
@@ -22,9 +23,10 @@ def students():
     return render_template('students.html', students=st)
 
 
-@app.route('/students/grades/<student_id>/')
+@app.route('/students/<student_id>/')
 def show_student(student_id):
-    return render_template("student.html", students=st, sid=student_id)
+    media = statistics.mean(st[int(student_id)]['grades'])
+    return render_template("student.html", students=st, sid=student_id, med=media)
 
 
 @app.route('/class/<class_name>/')

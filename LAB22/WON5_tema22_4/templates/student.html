@@ -13,7 +13,7 @@
                 {% for k, i in students.items() %}
                     {% if k == (sid | int) %}
                         <tr>
-                            <th>Nume</th><td>{{students[k]['lname']}}A</td>
+                            <th>Nume</th><td>{{students[k]['lname']}}</td>
                         </tr>
                         <tr>
                             <th>Prenume</th><td>{{students[k]['fname']}}</td>
@@ -25,7 +25,7 @@
                             <th>Note</th><td>{{students[k]['grades']}}</td>
                         </tr>
                         <tr>
-                            <th>Media</th><td>{{students[k]['grades']}}</td>
+                            <th>Media</th><td>{{med}}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}
