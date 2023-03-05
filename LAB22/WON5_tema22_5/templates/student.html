@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Students
+{% endblock %}
+
+{% block content %}
+    <div id="subtitle">Date elevi</div>
+        {% if (sid | int) not in students.keys() %}
+                <div id="inex">Elev inexistent</div>
+        {% else %}
+            <table id="stud">
+                {% for k, i in students.items() %}
+                    {% if k == (sid | int) %}
+                        <tr>
+                            <th>Nume</th><td>{{students[k]['lname']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Prenume</th><td>{{students[k]['fname']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Clasa</th><td>{{students[k]['class']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Note</th><td>{{students[k]['grades']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Media</th><td>{{med}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% endif %}
+    <hr>
+    <a href="/students/">Lista elevi</a>
+{% endblock %}
