@@ -7,12 +7,12 @@
 {% block content %}
     <div id="subtitle">Rezultate cautarii</div>
     {% set counter = [] %}
-    {% for k, i in students.items() %}
+    {% for i in students %}
         {% for j in i %}
             {% for s in search %}
-                {% if (i[j] | string()).lower() == s %}
-                    {% if k not in counter %}
-                        {% if counter.append(k) %}{% endif %}
+                {% if (j | string()).lower() == s %}
+                    {% if i[0] not in counter %}
+                        {% if counter.append(i[0]) %}{% endif %}
                     {% endif %}
                 {% endif %}
             {% endfor %}
@@ -22,11 +22,15 @@
         <div id="inex">Cautare fara succes</div>
     {% else %}
         {% for k in counter %}
-            <table id="stud">
-                <tr>
-                    <th class="search1">{{students[k]['lname']}} {{students[k]['fname']}}</th><td class="search2">{{students[k]['class']}}</td>
-                </tr>
-            </table>
+            {% for i in students %}
+                {% if i[0] == k %}
+                    <table id="stud">
+                    <tr>
+                            <th class="search1">{{i[1]}} {{i[2]}}</th><td class="search2">{{i[3]}}</td>
+                        </tr>
+                    </table>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     {% endif %}
     <hr>
