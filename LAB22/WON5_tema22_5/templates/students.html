@@ -10,10 +10,10 @@
         <tr>
             <th>Nume</th><th>Clasa</th>
         </tr>
-        {% for sid in students %}
+        {% for i in students %}
             <tr>
-                <td><a href="/students/{{sid}}/">{{students[sid]['lname']}} {{students[sid]['fname']}}</a></td>
-                <td><a href="/class/{{students[sid]['class']}}/">{{students[sid]['class']}}</a></td>
+                <td><a href="/students/{{i[0]}}/">{{i[1]}} {{i[2]}}</a></td>
+                <td><a href="/class/{{i[3]}}/">{{i[3]}}</a></td>
             </tr>
         {% endfor %}
     </table>

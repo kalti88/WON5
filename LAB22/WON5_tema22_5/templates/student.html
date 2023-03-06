@@ -6,23 +6,28 @@
 
 {% block content %}
     <div id="subtitle">Date elevi</div>
-        {% if (sid | int) not in students.keys() %}
+        {% if (sid | int) not in all_students %}
                 <div id="inex">Elev inexistent</div>
         {% else %}
             <table id="stud">
-                {% for k, i in students.items() %}
-                    {% if k == (sid | int) %}
+                {% for i in students %}
+                    {% if i[0] == (sid | int) %}
                         <tr>
-                            <th>Nume</th><td>{{students[k]['lname']}}</td>
+                            <th>Nume</th><td>{{i[1]}}</td>
                         </tr>
                         <tr>
-                            <th>Prenume</th><td>{{students[k]['fname']}}</td>
+                            <th>Prenume</th><td>{{i[2]}}</td>
                         </tr>
                         <tr>
-                            <th>Clasa</th><td>{{students[k]['class']}}</td>
+                            <th>Clasa</th><td>{{i[3]}}</td>
                         </tr>
                         <tr>
-                            <th>Note</th><td>{{students[k]['grades']}}</td>
+                            <th>Note</th>
+                                <td>{% for j in stud_grades %}
+                                        {% if i[0] == j[1] %}
+                                        {{j[0]}},
+                                        {% endif %}
+                                    {% endfor %}</td>
                         </tr>
                         <tr>
                             <th>Media</th><td>{{med}}</td>

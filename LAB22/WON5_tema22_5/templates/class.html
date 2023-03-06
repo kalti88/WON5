@@ -11,12 +11,17 @@
         {% else %}
             <table id="stud">
                 <tr>
-                    <th>Nume</th>
+                    <th>Nume</th><th>Note</th>
                 </tr>
-                {% for k, i in students.items() %}
-                    {% if i['class'] == cl %}
+                {% for i in students %}
+                    {% if i[3] == cl %}
                         <tr>
-                            <td>{{students[k]['lname']}} {{students[k]['fname']}}</td>
+                            <td>{{i[1]}} {{i[2]}}</td>
+                        <td>{% for j in stud_grades %}
+                                {% if i[0] == j[1] %}
+                                {{j[0]}},
+                                {% endif %}
+                            {% endfor %}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}
