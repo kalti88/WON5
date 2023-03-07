@@ -10,10 +10,9 @@ st = {
     15: {'fname': 'Geta', 'lname': 'Ionescu', 'class': '9b'},
 }
 
-classes = []
+classes = set()
 for i in st:
-    if st[i]['class'] not in classes:
-        classes.append(st[i]['class'])
+    classes.add(st[i]['class'])
 
 
 @app.route('/')
@@ -22,7 +21,7 @@ def students():
     return render_template('students.html', students=st)
 
 
-@app.route('/students/<student_id>/')
+@app.route('/student/<student_id>/')
 def show_student(student_id):
     return render_template("student.html", students=st, sid=student_id)
 
@@ -34,7 +33,12 @@ def show_class(class_name):
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    return render_template('search.html', search=request.args.get('search').lower().split(), students=st)
+    search_value = request.args.get('search').lower()
+    search_result = {}
+    for k, v in st.items():
+        if search_value in v['fname'].lower() or search_value in v['lname'].lower():
+            search_result[k] = v
+    return render_template('students.html', students=search_result)
 
 
 if __name__ == '__main__':
