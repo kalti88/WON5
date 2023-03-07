@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Students
+{% endblock %}
+
+{% block content %}
+    <div id="subtitle">Rezultatele cautarii</div>
+    {% set counter = [] %}
+    {% for k, i in students.items() %}
+        {% for j in i %}
+            {% for s in search %}
+                {% if (i[j] | string()).lower() == s %}
+                    {% if k not in counter %}
+                        {% if counter.append(k) %}{% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+    {% if counter == [] %}
+        <div id="inex">Cautare fara succes</div>
+    {% else %}
+        {% for k in counter %}
+            <table id="stud">
+                <tr>
+                    <th class="search1">{{students[k]['lname']}} {{students[k]['fname']}}</th><td class="search2">{{students[k]['class']}}</td>
+                </tr>
+            </table>
+        {% endfor %}
+    {% endif %}
+    <hr>
+    <a href="/students/">Lista elevi</a>
+{% endblock %}
