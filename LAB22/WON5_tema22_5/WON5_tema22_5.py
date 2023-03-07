@@ -59,8 +59,8 @@ except psycopg2.OperationalError as ex:
     print('Database error:', ex)
 # finally:
 #     print('Closing DB connection')
-# if conn:
-#     conn.close()
+#     if conn:
+#         conn.close()
 
 
 app = Flask('Students')
