@@ -29,7 +29,11 @@ def show_student(student_id):
 
 @app.route('/class/<class_name>/')
 def show_class(class_name):
-    return render_template("class.html", students=st, cl=class_name, all_cl=classes)
+    class_list = []
+    for i, k in st.items():
+        if k['class'] == class_name:
+            class_list.append(k)
+    return render_template("class.html", cl=class_list, cl_name=class_name)
 
 
 if __name__ == '__main__':

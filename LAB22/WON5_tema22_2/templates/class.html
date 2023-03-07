@@ -1,26 +1,24 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Students
+    Elevii clasei {{ cl_name }}
 {% endblock %}
 
 {% block content %}
-    <div id="subtitle">Elevii clasei {{ cl }}</div>
-        {% if cl not in all_cl %}
-                <div id="inex">Clasa inexistenta</div>
-        {% else %}
+    <div id="subtitle">Elevii clasei {{ cl_name }}</div>
+        {% if cl %}
             <table id="stud">
                 <tr>
                     <th>Nume</th>
                 </tr>
-                {% for k, i in students.items() %}
-                    {% if i['class'] == cl %}
-                        <tr>
-                            <td>{{students[k]['lname']}} {{students[k]['fname']}}</td>
-                        </tr>
-                    {% endif %}
+                {% for s in cl %}
+                    <tr>
+                        <td>{{s['lname']}} {{s['fname']}}</td>
+                    </tr>
                 {% endfor %}
             </table>
+        {% else %}
+            <div id="inex">Clasa inexistenta</div>
         {% endif %}
     <hr>
     <a href="/students/">Lista elevi</a>
