@@ -5,7 +5,8 @@ conn = None
 try:
     conn = psycopg2.connect(host="localhost", database="KBR_database",
                             user="postgres", password="Kaltidata22")
-
+except psycopg2.OperationalError as ex:
+    print('Database error:', ex)
 
 app = Flask('KBH')
 
