@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='eurokyt21.png') }}">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header id="header">
+        <table id="header_table">
+            <tr>
+                <td id="text_header">
+                    KBR
+                </td>
+                <td id="logo">
+                    <img src="{{ url_for('static', filename='eurokyt21.png') }}" height="80" alt="LOGO KYT">
+                </td>
+            </tr>
+        </table>
+    </header>
+    <nav class="vertical-nav">
+        <ul class="menu">
+            <li><a href="/home/">Home</a></li>
+            <li><a href="/furnizori/">Furnizori</a></li>
+            <li><a href="/comenzi/">Comenzi</a></li>
+            <li><a href="/comanda_noua/">Comanda nou</a></li>
+            <li><a href="/database/">Database</a></li>
+        </ul>
+    </nav>
+    <div id="div">
+        {% block content %}{% endblock %}
+    </div>
+    <footer id="footer">
+        {% block footer %}{% endblock %}
+    </footer>
+</body>
+</html>

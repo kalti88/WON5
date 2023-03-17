@@ -1,0 +1,119 @@
+body {
+    background-color: #76ECA9;
+    display: grid;
+    grid-template-columns: 4fr 19fr;
+    grid-template-rows:  1fr auto;
+    grid-template-areas:
+        "header header"
+        "nav div"
+        "nav footer";
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+#header{
+    grid-area: header;
+    background-color: blue;
+    height: 10vh;
+    font-family: Candara;
+    font-size: 50px;
+    padding: auto;
+}
+
+body > nav{
+    grid-area: nav;
+    with: 15vw;
+    margin: auto;
+    padding: auto;
+    height: 90vh;
+}
+
+#div{
+    grid-area: div;
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+    min-height: 79vh;
+    position: relative;
+}
+
+#footer{
+    grid-area: footer;
+    background-color: white;
+    height: 7vh;
+    width: 81.6vw;
+    margin: 10px;
+    padding: 5px;
+    bottom: 0;
+    position: fixed;
+    left: 17.1vw;
+}
+
+.vertical-nav ul {
+    list-style: none;
+}
+
+.vertical-nav ul li a {
+    text-decoration: none;
+    display: block;
+    width: 12vw;
+    background: white;
+    color: black;
+    box-shadow: 2px 2px 2px cadetblue;
+    border-radius: 8px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.vertical-nav a:hover {
+    background-color: #ccc;
+}
+
+#header_table {
+    width: 100vw
+}
+
+#text_header {
+    with: 50vw;
+    font-family: Candara;
+    text-align: left;
+    color: white;
+    vertical-align: top;
+    padding: 10px;
+}
+
+#logo {
+    with: 50vw;
+    text-align: right;
+    vertical-align: center;
+}
+
+.menu {
+    text-align: center;
+    width: 15vw;
+    font-family: Candara;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.home-nav ul {
+    list-style: none;
+}
+
+.home-nav ul li a {
+    text-decoration: none;
+    display: block;
+    width: 50%;
+    background: #76ECA9;
+    color: black;
+    box-shadow: 2px 2px 2px cadetblue;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.home-nav a:hover {
+    background-color: #ccc;
+}
