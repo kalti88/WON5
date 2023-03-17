@@ -1,4 +1,11 @@
 from flask import Flask, render_template, request
+import psycopg2
+
+conn = None
+try:
+    conn = psycopg2.connect(host="localhost", database="KBR_database",
+                            user="postgres", password="Kaltidata22")
+
 
 app = Flask('KBH')
 
