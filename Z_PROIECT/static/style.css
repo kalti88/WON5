@@ -97,23 +97,25 @@ body > nav{
     font-weight: bold;
 }
 
-
-.home-nav ul {
-    list-style: none;
+#h_div {
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+    padding-top: 50px;
+    text-align: center;
 }
 
-.home-nav ul li a {
+#h_button {
     text-decoration: none;
     display: block;
-    width: 50%;
+    width: 12vw;
     background: #76ECA9;
     color: black;
     box-shadow: 2px 2px 2px cadetblue;
     border-radius: 8px;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
-}
-
-.home-nav a:hover {
-    background-color: #ccc;
+    font-family: Candara;
+    font-weight: bold;
+    text-align: center;
 }
