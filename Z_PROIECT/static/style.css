@@ -75,7 +75,7 @@ body > nav{
 }
 
 #text_header {
-    with: 50vw;
+    max-with: 50vw;
     font-family: Candara;
     text-align: left;
     color: white;
@@ -143,11 +143,21 @@ body > nav{
 .title {
      font-family: Candara;
      margin: 20px;
-     padding: 20px;
+     padding-left: 20px;
      font-weight: bold;
 }
 
 .form_supp {
     margin: 30px;
+    margin-top: 0px;
     padding: 2px;
+}
+
+.row {
+    margin: 20px;
+    padding-left: 10px;
+}
+
+.form-control {
+    text-align: right;
 }

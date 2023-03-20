@@ -28,7 +28,7 @@ try:
 
     def supplier():
         c2 = conn.cursor()
-        query = f''' select
+        query = ''' select
                         s.supplier,
                         s.address,
                         s.email_address,
@@ -40,6 +40,38 @@ try:
         c2.execute(query)
         supp = c2.fetchall()
         c2.close()
+        return supp
+
+    def supplier2():
+        c2 = conn.cursor()
+        query = ''' select
+                        s.supplier,
+                        s.id
+                    from 
+                        supplier s
+                    order by s.supplier;
+                '''
+        c2.execute(query)
+        supp = c2.fetchall()
+        c2.close()
+        return supp
+
+    def acc_by_supp(s_id):
+        c3 = conn.cursor()
+        query = f''' select
+                        a.cod_acc,
+                        a.description,
+                        a.cod_supp
+                    from 
+                        accessories a
+                    join 
+                        supplier s on a.supp_id = s.id
+                    where s.id = {s_id}
+                    order by a.cod_acc;
+                '''
+        c3.execute(query)
+        supp = c3.fetchall()
+        c3.close()
         return supp
 
 except psycopg2.OperationalError as ex:
@@ -57,7 +89,6 @@ def home():
 @app.route('/furnizori/')
 def suppliers():
     table_supp = supplier()
-    print(table_supp)
     return render_template('furnizori.html', supplier=table_supp)
 
 
@@ -68,7 +99,19 @@ def orders():
 
 @app.route('/comanda_noua/')
 def new_order():
-    return render_template('comanda_noua.html')
+    tb_supp = supplier2()
+    return render_template('comanda_noua.html', supp=tb_supp)
+
+
+@app.route('/comanda_noua/furnizor/')
+def new_order2():
+    tb_supp = supplier2()
+    supp_id = 0
+    for i in tb_supp:
+        if i[0] == request.args.get('supplier'):
+            supp_id = i[1]
+    acc = acc_by_supp(supp_id)
+    return render_template('comanda_noua.html', supp=tb_supp, def_supplier=request.args.get('supplier'), accessories=acc)
 
 
 @app.route('/database/')

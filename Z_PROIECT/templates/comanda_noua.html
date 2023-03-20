@@ -1,55 +1,82 @@
 {% extends "layout.html" %}
 
-
 {% block title %}KBR Orders{% endblock %}
 
 {% block content %}
-<script type="text/javascript" src="{{ url_for('static', filename='KBR_orders.js') }}"></script>
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <div class="container">
-        <form action="" method="post" class="insert-form">
-            <h1 class="text-center">Creeaza o comanda noua</h1>
-            <hr>
-			<div class="title">Selecteaza furnizorul</div>
-			<input type="text" class="form_supp" name="name[]" required>
-            <div class="input-field">
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center" id="table_field">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<div class="container">
+    <form action="/comanda_noua/furnizor/" method="get" class="insert-form">
+        <h1 class="text-center">Creeaza o comanda noua</h1>
+        <hr>
+        {% if def_supplier %}
+            <div class="title">Alege furnizorul</div>
+            <input type="text" class="form_supp" name="supplier" placeholder={{def_supplier}} disabled>
+        {% else %}
+            <div class="title">Alege furnizorul</div>
+            <table>
+                <tr>
+                    <td>
+                        <select class="supp_list" name="supplier" required>
+                            <option> Cauta furnizorul </option>
+                            {% for i in supp %}
+                                <option>{{ i[0] }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="Alege">
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+    </form>
+    <form action="" method="get" class="insert-form">
+        <div class="input-field">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="table_field">
+                    <tr>
+                        <th>Cod accesoriu</th>
+                        <th>Cantitate</th>
+                        <th>Sterge</th>
+                    </tr>
+                    <tr>
+                        {% if def_supplier %}
+                            <td><select class="acc_list" name="accessories[]" required>
+                                <option> Selecteaza accesoriul </option>
+                                {% for i in accessories %}
+                                    <option>{{ i[0] }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><input type="text" class="form-control" name="qty[]" required></td>
+                            <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
+                        {% else %}
+                            <td><input type="text" class="form-control" name="name[]" required></td>
+                            <td><input type="text" class="form-control" name="qty[]" required></td>
+                            <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
+                        {% endif %}
+                    </tr>
+                </table>
+                <div class="row">
+                    <table>
                         <tr>
-                            <th>Cod accesoriu</th>
-                            <th>Cantitate</th>
-                            <th>Sterge</th>
-                        </tr>
-                        <tr>
-							<td><input type="text" class="form-control" name="name[]" required></td>
-							<td><input type="text" class="form-control" name="name[]" required></td>
-                            <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
+                            <th>
+                                <div class="col-12 text-right">
+                                    <input type="button" name="add" id="add" value="Adauga" class="btn btn-success">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="col-12 m-3">
+                                    <input type="submit" name="save" id="save" value="Salveaza" class="btn btn-primary btn-block">
+                                </div>
+                            </th>
                         </tr>
                     </table>
-                    <div class="row">
-
-                        <div class="col-12 text-right">
-
-                            <input type="button" name="add" id="add" value="Add" class="btn btn-success">
-
-                        </div>
-
-                        <div class="col-12 m-3">
-
-                            <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
-
-                        </div>
-
-                    </div>
-
                 </div>
-
             </div>
-
-        </form>
-
-    </div>
-
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='KBR_orders.js') }}"></script>
 {% endblock %}
 
 {% block foter %}
