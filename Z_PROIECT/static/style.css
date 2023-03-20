@@ -119,3 +119,35 @@ body > nav{
     font-weight: bold;
     text-align: center;
 }
+
+#h_button:hover {
+    background-color: #ccc;
+}
+
+#database_div {
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+}
+
+#database_table tr, th, td{
+    font-family: Candara;
+    padding: 5px;
+}
+
+.text-center {
+    font-family: Candara;
+    padding-left: 20px;
+}
+
+.title {
+     font-family: Candara;
+     margin: 20px;
+     padding: 20px;
+     font-weight: bold;
+}
+
+.form_supp {
+    margin: 30px;
+    padding: 2px;
+}

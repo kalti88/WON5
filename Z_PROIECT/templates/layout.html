@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-    <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='eurokyt21.png') }}">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
@@ -23,9 +22,9 @@
     <nav class="vertical-nav">
         <ul class="menu">
             <li><a href="/home/">Home</a></li>
+            <li><a href="/comanda_noua/">Comanda noua</a></li>
             <li><a href="/furnizori/">Furnizori</a></li>
             <li><a href="/comenzi/">Comenzi</a></li>
-            <li><a href="/comanda_noua/">Comanda nou</a></li>
             <li><a href="/database/">Database</a></li>
         </ul>
     </nav>

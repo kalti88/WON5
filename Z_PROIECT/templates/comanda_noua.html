@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+
+{% block title %}KBR Orders{% endblock %}
+
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename='KBR_orders.js') }}"></script>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <div class="container">
+        <form action="" method="post" class="insert-form">
+            <h1 class="text-center">Creeaza o comanda noua</h1>
+            <hr>
+			<div class="title">Selecteaza furnizorul</div>
+			<input type="text" class="form_supp" name="name[]" required>
+            <div class="input-field">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center" id="table_field">
+                        <tr>
+                            <th>Cod accesoriu</th>
+                            <th>Cantitate</th>
+                            <th>Sterge</th>
+                        </tr>
+                        <tr>
+							<td><input type="text" class="form-control" name="name[]" required></td>
+							<td><input type="text" class="form-control" name="name[]" required></td>
+                            <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
+                        </tr>
+                    </table>
+                    <div class="row">
+
+                        <div class="col-12 text-right">
+
+                            <input type="button" name="add" id="add" value="Add" class="btn btn-success">
+
+                        </div>
+
+                        <div class="col-12 m-3">
+
+                            <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
+
+{% block foter %}
+
+{% endblock %}
