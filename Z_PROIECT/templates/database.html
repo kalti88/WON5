@@ -17,6 +17,15 @@
     </div>
 {% endblock %}
 
-{% block foter %}
-
+{% block footer %}
+<form class="fo" action="/furnizori" method="GET">
+    <input id="sh" type="text" name="search" placeholder="Search">
+    <input class="foot_but" type="submit" name="search" value="Cauta">
+</form>
+<form class="fo">
+    <input class="foot_but" type="button" name="search" value="Adauga">
+</form>
+<form class="fo">
+    <input class="foot_but" type="submit" name="search" value="Modifica">
+</form>
 {% endblock %}

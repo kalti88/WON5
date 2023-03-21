@@ -161,3 +161,27 @@ body > nav{
 .form-control {
     text-align: right;
 }
+
+#sh {
+    width: 20vw;
+    padding: 5px;
+    margin: 10px;
+}
+
+.foot_but {
+    width: 5vw;
+    height: 3vh;
+    background-color: #76ECA9;
+    box-shadow: 2px 2px 2px cadetblue;
+    border-radius: 8px;
+    font-family: Candara;
+    cursor: pointer;
+}
+
+.foot_but:hover {
+    background-color: #ccc;
+}
+
+.fo {
+    display: inline-block;
+}

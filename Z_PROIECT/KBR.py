@@ -10,7 +10,7 @@ try:
 
     def data_base():
         c1 = conn.cursor()
-        query = f''' select
+        query = ''' select
                         a.cod_acc,
                         a.description,
                         s.supplier,
@@ -66,10 +66,10 @@ try:
                         accessories a
                     join 
                         supplier s on a.supp_id = s.id
-                    where s.id = {s_id}
+                    where s.id=%s
                     order by a.cod_acc;
                 '''
-        c3.execute(query)
+        c3.execute(query, (s_id,))
         supp = c3.fetchall()
         c3.close()
         return supp
@@ -109,7 +109,7 @@ def new_order2():
     supp_id = 0
     for i in tb_supp:
         if i[0] == request.args.get('supplier'):
-            supp_id = i[1]
+            supp_id = int(i[1])
     acc = acc_by_supp(supp_id)
     return render_template('comanda_noua.html', supp=tb_supp, def_supplier=request.args.get('supplier'), accessories=acc)
 
@@ -118,6 +118,12 @@ def new_order2():
 def database():
     table_db = data_base()
     return render_template('database.html', accessories=table_db)
+
+
+@app.route('/furnizori/search')
+def search_supp():
+    table_supp = supplier()
+    return render_template('furnizori.html', supplier=table_supp)
 
 
 if __name__ == '__main__':
