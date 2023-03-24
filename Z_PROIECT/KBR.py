@@ -9,7 +9,7 @@ try:
 
 
     def data_base():
-        c1 = conn.cursor()
+        c = conn.cursor()
         query = ''' select
                         a.cod_acc,
                         a.description,
@@ -21,29 +21,30 @@ try:
                         supplier s on a.supp_id = s.id
                     order by a.cod_acc;
                 '''
-        c1.execute(query)
-        dtbs = c1.fetchall()
-        c1.close()
+        c.execute(query)
+        dtbs = c.fetchall()
+        c.close()
         return dtbs
 
     def supplier():
-        c2 = conn.cursor()
+        c = conn.cursor()
         query = ''' select
                         s.supplier,
                         s.address,
                         s.email_address,
-                        s.phone
+                        s.phone,
+                        s.id
                     from 
                         supplier s
                     order by s.supplier;
                 '''
-        c2.execute(query)
-        supp = c2.fetchall()
-        c2.close()
+        c.execute(query)
+        supp = c.fetchall()
+        c.close()
         return supp
 
     def supplier2():
-        c2 = conn.cursor()
+        c = conn.cursor()
         query = ''' select
                         s.supplier,
                         s.id
@@ -51,13 +52,14 @@ try:
                         supplier s
                     order by s.supplier;
                 '''
-        c2.execute(query)
-        supp = c2.fetchall()
-        c2.close()
+        c.execute(query)
+        supp = c.fetchall()
+        c.close()
         return supp
 
+
     def acc_by_supp(s_id):
-        c3 = conn.cursor()
+        c = conn.cursor()
         query = f''' select
                         a.cod_acc,
                         a.description,
@@ -69,10 +71,72 @@ try:
                     where s.id=%s
                     order by a.cod_acc;
                 '''
-        c3.execute(query, (s_id,))
-        supp = c3.fetchall()
-        c3.close()
+        c.execute(query, (s_id,))
+        supp = c.fetchall()
+        c.close()
         return supp
+
+    def one_supplier(s_id):
+        c = conn.cursor()
+        query = ''' select
+                        s.supplier,
+                        s.address,
+                        s.email_address,
+                        s.phone,
+                        s.id
+                    from 
+                        supplier s
+                    where s.id = %s;
+                '''
+        c.execute(query, (s_id,))
+        supp = c.fetchall()
+        c.close()
+        return supp
+
+    def update_supplier():
+        c = conn.cursor()
+        query = """ update supplier set
+                        supplier=%s,
+                        address=%s,
+                        email_address=%s,
+                        phone=%s
+                    where id = %s;
+                """
+        c.execute(query,
+                  (
+                    request.form.get('supplier'),
+                    request.form.get('address'),
+                    request.form.get('email_address'),
+                    request.form.get('phone'),
+                    request.form.get('id'),
+                    )
+                  )
+        conn.commit()
+        c.close()
+
+    def new_supp():
+        c = conn.cursor()
+        query = """ insert into supplier
+                        (id,
+                        supplier,
+                        address,
+                        email_address,
+                        phone)
+                    values(default, %s, %s, %s, %s)
+                    returning id;
+                """
+        c.execute(query,
+                  (
+                      request.form.get('supplier'),
+                      request.form.get('address'),
+                      request.form.get('email_address'),
+                      request.form.get('phone'),
+                    )
+                  )
+        conn.commit()
+        new_supp_id = c.fetchone()
+        c.close()
+        return new_supp_id
 
 except psycopg2.OperationalError as ex:
     print('Database error:', ex)
@@ -90,6 +154,30 @@ def home():
 def suppliers():
     table_supp = supplier()
     return render_template('furnizori.html', supplier=table_supp)
+
+
+@app.route('/furnizori/edit/<supp>/')
+def edit_supplier(supp):
+    s = one_supplier(supp)
+    return render_template('furnizor.html', supplier=s[0])
+
+
+@app.route('/furnizori/save/', methods=['POST'])
+def save_supplier():
+    update_supplier()
+    s = one_supplier(request.form.get('id'))
+    return render_template('furnizor.html', updated_supplier=s[0])
+
+
+@app.route('/furnizori/new/')
+def new_supplier():
+    return render_template('new_furnizor.html', supplier='')
+
+
+@app.route('/furnizori/new/save/', methods=['POST'])
+def save_new_supplier():
+    s = one_supplier(new_supp())
+    return render_template('new_furnizor.html', supplier=s[0])
 
 
 @app.route('/comenzi/')
@@ -120,9 +208,9 @@ def database():
     return render_template('database.html', accessories=table_db)
 
 
-@app.route('/furnizori/search')
+@app.route('/furnizori/cauta')
 def search_supp():
-    table_supp = supplier()
+    s = request.args.get('supplier')
     return render_template('furnizori.html', supplier=table_supp)
 
 

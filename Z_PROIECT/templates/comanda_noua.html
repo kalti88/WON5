@@ -24,7 +24,7 @@
                         </select>
                     </td>
                     <td>
-                        <input type="submit" value="Alege">
+                        <input class="supp_list" type="submit" value="Alege">
                     </td>
                 </tr>
             </table>
@@ -52,7 +52,7 @@
                         {% else %}
                             <td><input type="text" class="form-control" name="name[]" required></td>
                             <td><input type="text" class="form-control" name="qty[]" required></td>
-                            <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
+                            <td><input class="btn btn-danger" name="remove" value="Sterge" type="button"></td>
                         {% endif %}
                     </tr>
                 </table>
@@ -76,6 +76,24 @@
         </div>
     </form>
 </div>
+<script>
+var cod_html = '<tr>'+
+    '{% if def_supplier %}'+
+    '<td><select class="acc_list" name="accessories[]" required>'+
+        '<option> Selecteaza accesoriul </option>'+
+        '{% for i in accessories %}'+
+            '<option>{{i[0]}}</option>'+
+        '{% endfor %}'+
+    '</select></td>'+
+    '<td><input type="text" class="form-control" name="qty[]" required></td>'+
+    '<td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>'+
+    '{% else %}'+
+    '<td><input type="text" class="form-control" name="name[]" required></td>'+
+    '<td><input type="text" class="form-control" name="qty[]" required></td>'+
+    '<td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>'+
+    '{% endif %}'+
+    '</tr>';
+</script>
 <script type="text/javascript" src="{{ url_for('static', filename='KBR_orders.js') }}"></script>
 {% endblock %}
 

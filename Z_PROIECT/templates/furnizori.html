@@ -1,20 +1,22 @@
 {% extends "layout.html" %}
 
-{% block title %}KBR Orders{% endblock %}
+{% block title %}KBR Suppliers{% endblock %}
 
 {% block content %}
     <div id="database_div">
         <table id="database_table">
             <tr>
-                <th>Nume furnizor</th><th>Adresa furnizor</th><th>E-mail furnizor</th><th>Telefon firnizor</th>
+                <th>Nume furnizor</th><th>Adresa furnizor</th><th>E-mail furnizor</th><th>Telefon furnizor</th>
             </tr>
             {% for i in supplier %}
-                <tr>
-                    <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}</td><td>{{i[3]}}</td>
-                </tr>
+                    <tr>
+                        <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}</td><td>{{i[3]}}</td>
+                        <td><button class="foot_but" onclick="window.location.href='/furnizori/edit/{{i[4]}}/'">Modifica</button></td>
+                    </tr>
             {% endfor %}
         </table>
     </div>
+
 {% endblock %}
 
 {% block footer %}
@@ -22,10 +24,5 @@
     <input id="sh" type="text" name="search" placeholder="Search">
     <input class="foot_but" type="submit" name="search" value="Cauta">
 </form>
-<form class="fo">
-    <input class="foot_but" type="button" name="search" value="Adauga">
-</form>
-<form class="fo">
-    <input class="foot_but" type="submit" name="search" value="Modifica">
-</form>
+    <button class="foot_but" onclick="window.location.href='/furnizori/new/'">Nou</button>
 {% endblock %}

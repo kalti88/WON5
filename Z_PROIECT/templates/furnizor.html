@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}KBR Supplier{% endblock %}
+
+{% block content %}
+    <div id="database_div">
+        {% if supplier %}
+        <form class="fo" action="/furnizori/save/" method="post">
+            <table id="database_table">
+                <tr>
+                    <th>Nume furnizor</th><td><input type="text" class="edit" name="supplier" value="{{supplier[0]}}"></td>
+                </tr>
+                <tr>
+                    <th>Adresa furnizor</th><td><input type="text" class="edit" name="address" value="{{supplier[1]}}"></td>
+                </tr>
+                <tr>
+                    <th>E-mail furnizor</th><td><input type="text" class="edit" name="email_address" value="{{supplier[2]}}"></td>
+                </tr>
+                <tr>
+                    <th>Telefon furnizor</th><td><input type="text" class="edit" name="phone" value="{{supplier[3]}}"></td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" class="edit" name="id" value="{{supplier[4]}}"></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="foot_but2" onclick="window.location.href='/furnizori/'">Inapoi la furnizori</button></td>
+                    <td><button type="reset" class="foot_but">Reseteaza</button><button type="submit" class="foot_but">Salveaza</button></td>
+                </tr>
+            </table>
+        </form>
+        {% else %}
+            <table id="database_table2">
+                <tr>
+                    <th>Nume furnizor</th><td><input type="text" class="edit" name="supplier" value="{{updated_supplier[0]}}" disabled></td>
+                </tr>
+                <tr>
+                    <th>Adresa furnizor</th><td><input type="text" class="edit" name="address" value="{{updated_supplier[1]}}" disabled></td>
+                </tr>
+                <tr>
+                    <th>E-mail furnizor</th><td><input type="text" class="edit" name="email_address" value="{{updated_supplier[2]}}" disabled></td>
+                </tr>
+                <tr>
+                    <th>Telefon furnizor</th><td><input type="text" class="edit" name="phone" value="{{updated_supplier[3]}}" disabled></td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" class="edit" name="id" value="{{updated_supplier[4]}}"></td>
+                </tr>
+                <tr>
+                    <td><button class="foot_but2" onclick="window.location.href='/furnizori/'">Inapoi la furnizori</button></td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
