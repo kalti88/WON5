@@ -60,7 +60,7 @@ try:
 
     def acc_by_supp(s_id):
         c = conn.cursor()
-        query = f''' select
+        query = ''' select
                         a.cod_acc,
                         a.description,
                         a.cod_supp
@@ -138,6 +138,28 @@ try:
         c.close()
         return new_supp_id
 
+
+    def search_supplier(s1, s2, s3, s4):
+        c = conn.cursor()
+        query = ''' SELECT 
+                        s.supplier,
+                        s.address,
+                        s.email_address,
+                        s.phone,
+                        s.id
+                    FROM supplier s  
+                        WHERE supplier ilike any (values(%s))
+                            or address  ilike any (values(%s))
+                            or email_address  ilike any (values(%s))
+                            or phone ilike any (values(%s))
+                    order by s.supplier;
+                '''
+        c.execute(query, (s1, s2, s3, s4,))
+        supp = c.fetchall()
+        print(query)
+        c.close()
+        return supp
+
 except psycopg2.OperationalError as ex:
     print('Database error:', ex)
 
@@ -180,6 +202,16 @@ def save_new_supplier():
     return render_template('new_furnizor.html', supplier=s[0])
 
 
+@app.route('/furnizori/search/', methods=['POST'])
+def search_supp():
+    s = request.form.get('search')
+    ls = s.split(' ')
+    sch = "%" + "%'), ('%".join(ls) + "%"
+    print(sch)
+    table_supp = search_supplier(sch, sch, sch, sch)
+    return render_template('furnizori.html', supplier=table_supp)
+
+
 @app.route('/comenzi/')
 def orders():
     return render_template('comenzi.html')
@@ -206,12 +238,6 @@ def new_order2():
 def database():
     table_db = data_base()
     return render_template('database.html', accessories=table_db)
-
-
-@app.route('/furnizori/cauta')
-def search_supp():
-    s = request.args.get('supplier')
-    return render_template('furnizori.html', supplier=table_supp)
 
 
 if __name__ == '__main__':
