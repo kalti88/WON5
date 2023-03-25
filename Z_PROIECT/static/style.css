@@ -150,9 +150,13 @@ body > nav{
 }
 
 .form_supp {
-    margin: 30px;
-    margin-top: 0px;
+    width: 10vw;
+    height: 3vh;
+    margin: 5px;
+    margin-left: 35px;
     padding: 2px;
+    font-family: Candara;
+    font-size: 15px;
 }
 
 .row {
@@ -162,6 +166,12 @@ body > nav{
 
 .form-control {
     text-align: right;
+    width: 10vw;
+    height: 2vh;
+    margin: 5px;
+    padding: 2px;
+    font-family: Candara;
+    font-size: 15px;
 }
 
 #sh {
@@ -190,10 +200,13 @@ body > nav{
 }
 
 .supp_list {
-    margin: 10px;
-    margin-left: 20px;
-    margin-top: 0px;
+    width: 10vw;
+    height: 3vh;
+    margin: 5px;
+    margin-left: 35px;
     padding: 2px;
+    font-family: Candara;
+    font-size: 15px;
 }
 
 .edit {
@@ -237,10 +250,35 @@ body > nav{
 }
 
 .supp_acc {
-    width: 20vw;
+    width: 20.5vw;
     height: 5vh;
     margin: 5px;
     padding:5 px;
     font-family: Candara;
     font-size: 15px;
 }
+
+.acc_list {
+    width: 10.5vw;
+    height: 3vh;
+    margin: 5px;
+    padding: 2px;
+    font-family: Candara;
+    font-size: 15px;
+}
+
+#remove {
+    width: 5vw;
+    height: 3vh;
+    background-color: #76ECA9;
+    box-shadow: 2px 2px 2px cadetblue;
+    border-radius: 8px;
+    font-family: Candara;
+    cursor: pointer;
+    margin: 10px;
+    margin-top:2px;
+    margin-bottom: 2px;
+}
+
+#remove:hover {
+    background-color: #ccc;

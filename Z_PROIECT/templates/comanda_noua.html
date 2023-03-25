@@ -5,7 +5,7 @@
 {% block content %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <div class="container">
-    <form action="/comanda_noua/furnizor/" method="get" class="insert-form">
+    <form action="/comanda_noua/furnizor/" method="post" class="insert-form">
         <h1 class="text-center">Creeaza o comanda noua</h1>
         <hr>
         {% if def_supplier %}
@@ -16,21 +16,29 @@
             <table>
                 <tr>
                     <td>
-                        <select class="supp_list" name="supplier" required>
+                        <select class="supp_list" name="supplier" id="select_supp" required onchange="change_supp_id()">
                             <option> Cauta furnizorul </option>
                             {% for i in supp %}
-                                <option>{{ i[0] }}</option>
+                                <option value="{{i[1]}}">{{ i[0] }}</option>
                             {% endfor %}
                         </select>
                     </td>
+                    <td><input type="hidden" id="supp_id" class="edit" name="supp_id"></td>
+                    <script>
+                        document.getElementById('supp_id').value = document.getElementById('select_supp').value;
+                        function change_supp_id() {
+                            document.getElementById('supp_id').value = document.getElementById('select_supp').value;
+                            }
+                    </script>
                     <td>
-                        <input class="supp_list" type="submit" value="Alege">
+                        <input class="foot_but3" type="submit" value="Alege">
                     </td>
                 </tr>
             </table>
         {% endif %}
     </form>
-    <form action="" method="get" class="insert-form">
+    {% if def_supplier %}
+    <form action="/comanda_noua/new_order_done/" method="post" class="insert-form">
         <div class="input-field">
             <div class="table-responsive">
                 <table class="table table-bordered text-center" id="table_field">
@@ -40,7 +48,6 @@
                         <th>Sterge</th>
                     </tr>
                     <tr>
-                        {% if def_supplier %}
                             <td><select class="acc_list" name="accessories[]" required>
                                 <option> Selecteaza accesoriul </option>
                                 {% for i in accessories %}
@@ -49,11 +56,6 @@
                             </select></td>
                             <td><input type="text" class="form-control" name="qty[]" required></td>
                             <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
-                        {% else %}
-                            <td><input type="text" class="form-control" name="name[]" required></td>
-                            <td><input type="text" class="form-control" name="qty[]" required></td>
-                            <td><input class="btn btn-danger" name="remove" value="Sterge" type="button"></td>
-                        {% endif %}
                     </tr>
                 </table>
                 <div class="row">
@@ -61,12 +63,12 @@
                         <tr>
                             <th>
                                 <div class="col-12 text-right">
-                                    <input type="button" name="add" id="add" value="Adauga" class="btn btn-success">
+                                    <input type="button" name="add" id="add" value="Adauga" class="foot_but3">
                                 </div>
                             </th>
                             <th>
                                 <div class="col-12 m-3">
-                                    <input type="submit" name="save" id="save" value="Salveaza" class="btn btn-primary btn-block">
+                                    <input type="submit" name="save" id="save" value="Salveaza" class="foot_but3">
                                 </div>
                             </th>
                         </tr>
@@ -95,6 +97,7 @@ var cod_html = '<tr>'+
     '</tr>';
 </script>
 <script type="text/javascript" src="{{ url_for('static', filename='KBR_orders.js') }}"></script>
+{% endif %}
 {% endblock %}
 
 {% block footer %}

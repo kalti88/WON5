@@ -323,15 +323,21 @@ def new_order():
     return render_template('comanda_noua.html', supp=tb_supp)
 
 
-@app.route('/comanda_noua/furnizor/')
+@app.route('/comanda_noua/furnizor/', methods=['POST'])
 def new_order2():
-    tb_supp = supplier2()
-    supp_id = 0
-    for i in tb_supp:
-        if i[0] == request.args.get('supplier'):
-            supp_id = int(i[1])
-    acc = acc_by_supp(supp_id)
-    return render_template('comanda_noua.html', supp=tb_supp, def_supplier=request.args.get('supplier'), accessories=acc)
+    supp = one_supplier(request.form.get('supp_id'))
+    acc = acc_by_supp(request.form.get('supp_id'))
+    return render_template('comanda_noua.html', def_supplier=supp[0][0], accessories=acc)
+
+
+@app.route('/comanda_noua/new_order_done/', methods=['POST'])
+def new_order_done():
+    # supp = one_supplier(request.form.get('supp_id'))
+    # print(supp[0])
+    # acc = acc_by_supp(request.form.get('supp_id'))
+    print(request.form.get('accessories[]'))
+    print(request.form.get('qty[]'))
+    return render_template('PDF_template.html')
 
 
 @app.route('/accessories/')
