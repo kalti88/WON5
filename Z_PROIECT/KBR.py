@@ -81,6 +81,53 @@ try:
         conn.commit()
         c.close()
 
+    def new_acc():
+        c = conn.cursor()
+        query = """ insert into accessories
+                        (id,
+                        cod_acc,
+                        cod_supp,
+                        description,
+                        supp_id)
+                    values(default, %s, %s, %s, %s)
+                    returning id;
+                """
+        c.execute(query,
+                  (
+                      request.form.get('cod_acc'),
+                      request.form.get('cod_supp'),
+                      request.form.get('description'),
+                      request.form.get('supp_id'),
+                  )
+                  )
+        conn.commit()
+        new_supp_id = c.fetchone()
+        c.close()
+        return new_supp_id
+
+    def search_accessory(s1, s2, s3):
+        c = conn.cursor()
+        query = ''' SELECT 
+                        a.cod_acc,
+                        a.description,
+                        s.supplier,
+                        a.cod_supp,
+                        a.id
+                    FROM 
+                        accessories a
+                    JOIN
+                        supplier s on a.supp_id = s.id
+                    WHERE cod_acc ilike any (%s)
+                        or description  ilike any (%s)
+                        or cod_supp  ilike any (%s)            
+                    order by a.cod_acc;
+                '''
+
+        c.execute(query, (s1, s2, s3,))
+        supp = c.fetchall()
+        c.close()
+        return supp
+
     def supplier():
         c = conn.cursor()
         query = ''' select
@@ -203,15 +250,14 @@ try:
                         s.phone,
                         s.id
                     FROM supplier s  
-                        WHERE supplier ilike any (%s)
-                            or address  ilike any (%s)
-                            or email_address  ilike any (%s)
-                            or phone ilike any (%s)
+                    WHERE supplier ilike any (%s)
+                        or address  ilike any (%s)
+                        or email_address  ilike any (%s)
+                        or phone ilike any (%s)
                     order by s.supplier;
                 '''
         c.execute(query, (s1, s2, s3, s4,))
         supp = c.fetchall()
-        print(query)
         c.close()
         return supp
 
@@ -262,7 +308,6 @@ def search_supp():
     s = request.form.get('search')
     ls = s.split(' ')
     sch = '{"%' + '%", "%'.join(ls) + '%"}'
-    print(sch)
     table_supp = search_supplier(sch, sch, sch, sch)
     return render_template('furnizori.html', supplier=table_supp)
 
@@ -306,6 +351,29 @@ def save_accessory():
     update_accessory()
     a, s = one_acc(request.form.get('id'))
     return render_template('accessory.html', suppliers=s, updated_accessory=a[0])
+
+
+@app.route('/accessories/new/')
+def new_accessory():
+    s = supplier2()
+    return render_template('new_accessory.html', suppliers=s, accessory='')
+
+
+@app.route('/accessories/new/save/', methods=['POST'])
+def save_new_accessory():
+    a, s = one_acc(new_acc())
+    return render_template('new_accessory.html', suppliers=s, accessory=a[0])
+
+
+@app.route('/accessories/search/', methods=['POST'])
+def search_acc():
+    s = request.form.get('search')
+    ls = s.split(' ')
+    sch = '{"%' + '%", "%'.join(ls) + '%"}'
+    print(sch)
+    table_acc = search_accessory(sch, sch, sch)
+    print(table_acc)
+    return render_template('database.html', accessories=table_acc)
 
 
 if __name__ == '__main__':
