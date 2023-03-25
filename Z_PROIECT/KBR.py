@@ -14,7 +14,8 @@ try:
                         a.cod_acc,
                         a.description,
                         s.supplier,
-                        a.cod_supp
+                        a.cod_supp,
+                        a.id
                     from 
                         accessories a
                     join 
@@ -25,6 +26,60 @@ try:
         dtbs = c.fetchall()
         c.close()
         return dtbs
+
+
+    def one_acc(a_id):
+        c = conn.cursor()
+        query = ''' select
+                        a.cod_acc,
+                        a.cod_supp,
+                        a.description,
+                        s.supplier,
+                        a.id,
+                        s.id
+                    from 
+                        accessories a
+                    join 
+                        supplier s on a.supp_id = s.id
+                    where a.id = %s
+                    order by a.cod_acc;
+                '''
+        c.execute(query, (a_id,))
+        dtbs = c.fetchall()
+        c.close()
+        c = conn.cursor()
+        query = ''' select
+                        s.supplier,
+                        s.id
+                    from 
+                        supplier s
+                    order by s.supplier;
+                '''
+        c.execute(query)
+        supp = c.fetchall()
+        c.close()
+        return dtbs, supp
+
+    def update_accessory():
+        c = conn.cursor()
+        query = """ update accessories set
+                           cod_acc=%s,
+                           cod_supp=%s,
+                           description=%s,
+                           supp_id=%s
+                       where id = %s;
+                   """
+        c.execute(query,
+                  (
+                      request.form.get('cod_acc'),
+                      request.form.get('cod_supp'),
+                      request.form.get('description'),
+                      request.form.get('supp_id'),
+                      request.form.get('id'),
+                  )
+                  )
+        conn.commit()
+        c.close()
 
     def supplier():
         c = conn.cursor()
@@ -148,10 +203,10 @@ try:
                         s.phone,
                         s.id
                     FROM supplier s  
-                        WHERE supplier ilike any (values(%s))
-                            or address  ilike any (values(%s))
-                            or email_address  ilike any (values(%s))
-                            or phone ilike any (values(%s))
+                        WHERE supplier ilike any (%s)
+                            or address  ilike any (%s)
+                            or email_address  ilike any (%s)
+                            or phone ilike any (%s)
                     order by s.supplier;
                 '''
         c.execute(query, (s1, s2, s3, s4,))
@@ -206,7 +261,7 @@ def save_new_supplier():
 def search_supp():
     s = request.form.get('search')
     ls = s.split(' ')
-    sch = "%" + "%'), ('%".join(ls) + "%"
+    sch = '{"%' + '%", "%'.join(ls) + '%"}'
     print(sch)
     table_supp = search_supplier(sch, sch, sch, sch)
     return render_template('furnizori.html', supplier=table_supp)
@@ -234,10 +289,23 @@ def new_order2():
     return render_template('comanda_noua.html', supp=tb_supp, def_supplier=request.args.get('supplier'), accessories=acc)
 
 
-@app.route('/database/')
+@app.route('/accessories/')
 def database():
     table_db = data_base()
     return render_template('database.html', accessories=table_db)
+
+
+@app.route('/accessories/edit/<acc>/')
+def edit_accessory(acc):
+    a, s = one_acc(acc)
+    return render_template('accessory.html', suppliers=s, accessory=a[0])
+
+
+@app.route('/accessories/save/', methods=['POST'])
+def save_accessory():
+    update_accessory()
+    a, s = one_acc(request.form.get('id'))
+    return render_template('accessory.html', suppliers=s, updated_accessory=a[0])
 
 
 if __name__ == '__main__':

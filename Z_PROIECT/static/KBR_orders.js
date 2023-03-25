@@ -32,3 +32,14 @@
                 }
             })
         })
+
+
+function var_sup_id() {
+    let x = document.getElementById('select_supp');
+    const id_elem = document.getElementById('supp_id');
+    for (var i=0, i<= suppliers, i++) {
+        if (i[0] == x) {
+            id_elem.innerhtml=i[1];
+        }
+    }
+}

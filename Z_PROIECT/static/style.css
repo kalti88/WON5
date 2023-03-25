@@ -218,3 +218,29 @@ body > nav{
 .foot_but2:hover {
     background-color: #ccc;
 }
+
+.foot_but3 {
+    width: 5vw;
+    height: 3vh;
+    background-color: #76ECA9;
+    box-shadow: 2px 2px 2px cadetblue;
+    border-radius: 8px;
+    font-family: Candara;
+    cursor: pointer;
+    margin: 10px;
+    margin-top:2px;
+    margin-bottom: 2px;
+}
+
+.foot_but3:hover {
+    background-color: #ccc;
+}
+
+.supp_acc {
+    width: 20vw;
+    height: 5vh;
+    margin: 5px;
+    padding:5 px;
+    font-family: Candara;
+    font-size: 15px;
+}
