@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}KBR Orders{% endblock %}
+
+{% block content %}
+    <div id="database_div">
+        <div> Numar comanda: {{orders[0][0]}}   Furnizor: {{orders[0][4]}}    Data: {{orders[0][5]-orders[0][6]-orders[0][7]}}</div>
+        <table id="database_table">
+            <tr>
+                <th>Cod accessoriu</th><th>Descriere</th><th>Descriere furnizor</th><th>Cantitate</th>
+            </tr>
+                {% for i in orders %}
+                    <tr>
+                        <td>{{i[1]}}</td><td>{{i[2]}}</td><td>{{i[3]}}</td><td>{{i[8]}}</td>
+                    </tr>
+                {% endfor %}
+            <tr>
+                    <td><button class="foot_but2" onclick="window.location.href='/comenzi/'">Inapoi la comenzi</button></td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<form class="fo" action="/accessories/search/" method="POST">
+    <input id="sh" type="text" name="search" placeholder="Search">
+    <input class="foot_but" type="submit" name="search" value="Cauta">
+</form>
+{% endblock %}

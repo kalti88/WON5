@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}KBR Orders{% endblock %}
+
+{% block content %}
+    <div id="database_div">
+        <table id="database_table">
+            <tr>
+                <th>Numar comada</th><th>Furnizor</th><th>Data</th>
+            </tr>
+            {% if orders %}
+                {% for i in orders %}
+                    <tr>
+                        <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}-{{i[3]}}-{{i[4]}}</td>
+                        <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[0]}}/'">Vizualizeaza</button></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% for i in search_orders %}
+                    <tr>
+                        <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}-{{i[3]}}-{{i[4]}}</td>
+                        <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[0]}}/'">Vizualizeaza</button></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<form class="fo" action="/accessories/search/" method="POST">
+    <input id="sh" type="text" name="search" placeholder="Search">
+    <input class="foot_but" type="submit" name="search" value="Cauta">
+</form>
+{% endblock %}

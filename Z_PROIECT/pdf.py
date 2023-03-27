@@ -1,23 +1,42 @@
+from xhtml2pdf import pisa
 import jinja2
-import pdfkit
-from datetime import datetime
+from datetime import date
+templateLoader = jinja2.FileSystemLoader(searchpath="./")
+templateEnv = jinja2.Environment(loader=templateLoader)
+TEMPLATE_FILE = "templates/PDF_template.html"
+template = templateEnv.get_template(TEMPLATE_FILE)
 
-my_name = "Frank Andrade"
-item1 = "TV"
-item2 = "Couch"
-item3 = "Washing Machine"
-today_date = datetime.today().strftime("%d %b, %Y")
+ord_data = [('22', 'description', '100',), ('22', 'description', '100',), ('22', 'description', '100',), ('22', 'description', '100',), ('22', 'description', '100',)]
+supp_data = [('supplier', "address", 'email', 'phone',)]
+ord_id = '10'
+notes = 'nekrjnverjvnerhvnejhrv'
+body = {
+    "data": {
+        "order_id": ord_id,
+        "order": ord_data,
+        "supplier": supp_data,
+        "note": notes,
+        "today": date.today(),
+    }
+}
 
-context = {'my_name': my_name, 'item1': item1, 'item2': item2, 'item3': item3,
-           'today_date': today_date}
 
-template_loader = jinja2.FileSystemLoader('./')
-template_env = jinja2.Environment(loader=template_loader)
+outputFilename = "invoice.pdf"
 
-html_template = 'basic-template.html'
-template = template_env.get_template(html_template)
-output_text = template.render(context)
 
-config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
-output_pdf = 'pdf_generated.pdf'
-pdfkit.from_string(output_text, output_pdf, configuration=config, css='style.css')
+def convertHtmlToPdf(body, outputFilename):
+    sourceHtml = template.render(json_data=body["data"])
+    resultFile = open(outputFilename, "w+b")
+    pisaStatus = pisa.CreatePDF(
+            src=sourceHtml,
+            dest=resultFile)
+
+    resultFile.close()
+
+    print(pisaStatus.err, type(pisaStatus.err))
+    return pisaStatus.err
+
+
+if __name__ == "__main__":
+    pisa.showLogging()
+    convertHtmlToPdf(body, outputFilename)

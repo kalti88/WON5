@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request
 import psycopg2
+import pdfkit
+import jinja2
+import pdf as pdf_creator
+from datetime import date
 
 
 conn = None
@@ -165,7 +169,8 @@ try:
         query = ''' select
                         a.cod_acc,
                         a.description,
-                        a.cod_supp
+                        a.cod_supp,
+                        a.id
                     from 
                         accessories a
                     join 
@@ -261,6 +266,132 @@ try:
         c.close()
         return supp
 
+    def create_order():
+        c = conn.cursor()
+        query = """ insert into order_id
+                        (id,
+                        created_at,
+                        supp_id)
+                    values(default, default, %s)
+                    returning id;
+                """
+        c.execute(query, (request.form.get('supp_id'),))
+        conn.commit()
+        ord_id = c.fetchall()
+        c.close()
+        return ord_id
+
+    def fill_order(list_acc, list_qty, ord_id):
+        c = conn.cursor()
+        i = 0
+        while i < len(list_acc):
+            query = """ insert into orders
+                            (id,
+                            acc_id,
+                            qty,
+                            ord_id)
+                        values(default, %s, %s, %s);
+                    """
+            c.execute(query, (list_acc[i], list_qty[i], ord_id,))
+            conn.commit()
+            i += 1
+        c.close()
+
+    def print_order(ord_id):
+        c = conn.cursor()
+        query = ''' select
+                        a.cod_acc,
+                        a.cod_supp,
+                        o.qty
+                    from 
+                        orders o
+                    join 
+                        order_id oi on o.ord_id = oi.id
+                    join
+                        accessories a on o.acc_id = a.id
+                    where oi.id = %s
+                    order by o.id;
+                '''
+        c.execute(query, (ord_id,))
+        ord_data = c.fetchall()
+        c.close()
+        return ord_data
+
+    def show_orders():
+        c = conn.cursor()
+        query = '''select
+                        o.id,
+                        s.supplier,
+                        date_part('day', O.created_at),
+                        date_part('month',O.created_at),
+                        date_part('year',O.created_at)
+                    from 
+                        order_id o
+                    join 
+                        supplier s on o.supp_id = s.id
+                    order by o.id;
+                '''
+        c.execute(query)
+        all_ord = c.fetchall()
+        c.close()
+        return all_ord
+
+
+    def show_order(oi_id):
+        c = conn.cursor()
+        query = '''select
+                        oi.id,
+                        a.cod_acc,
+                        a.description,
+                        o.qty,
+                        s.supplier,
+                        date_part ('day', oi.created_at),
+                        date_part ('month', oi.created_at),
+                        date_part ('year', oi.created_at),
+                        a.cod_supp
+                    from 
+                        orders o
+                    join 
+                        order_id oi on o.ord_id = oi.id
+                    join
+                        supplier s on oi.supp_id = s.id    
+                    join
+                        accessories a on o.acc_id = a.id
+                    where oi.id=(%s);
+                '''
+        c.execute(query, (oi_id,))
+        one_ord = c.fetchall()
+        c.close()
+        return one_ord
+
+
+    def search_ord(s1, s2, s3):
+        c = conn.cursor()
+        query = '''select
+                        oi.id,
+                        a.cod_acc,
+                        a.description,
+                        o.qty,
+                        s.supplier
+                    from 
+                        orders o
+                    join 
+                        order_id oi on o.ord_id = oi.id
+                    join
+                        supplier s on oi.supp_id = s.id    
+                    join
+                        accessories a on o.acc_id = a.id
+                    where a.cod_acc ilike any (%s)
+                        or a.description ilike any (%s)
+                        or s.supplier ilike any (%s)
+                    order by o.id;
+                   '''
+
+        c.execute(query, (s1, s2, s3,))
+        supp = c.fetchall()
+        c.close()
+        return supp
+
 except psycopg2.OperationalError as ex:
     print('Database error:', ex)
 
@@ -314,7 +445,23 @@ def search_supp():
 
 @app.route('/comenzi/')
 def orders():
-    return render_template('comenzi.html')
+    all_ord = show_orders()
+    return render_template('orders.html', orders=all_ord)
+
+
+@app.route('/comenzi/<oi_id>/')
+def order(oi_id):
+    one_ord = show_order(oi_id)
+    return render_template('order.html', orders=one_ord)
+
+
+@app.route('/accessories/search/', methods=['POST'])
+def search_orders():
+    s = request.form.get('search')
+    ls = s.split(' ')
+    sch = '{"%' + '%", "%'.join(ls) + '%"}'
+    all_ord = search_ord(sch, sch, sch)
+    return render_template('orders.html', search_orders=all_ord)
 
 
 @app.route('/comanda_noua/')
@@ -325,19 +472,36 @@ def new_order():
 
 @app.route('/comanda_noua/furnizor/', methods=['POST'])
 def new_order2():
-    supp = one_supplier(request.form.get('supp_id'))
-    acc = acc_by_supp(request.form.get('supp_id'))
-    return render_template('comanda_noua.html', def_supplier=supp[0][0], accessories=acc)
+    supp = one_supplier(request.form.get('supplier'))
+    print(request.form.get('supplier'))
+    acc = acc_by_supp(request.form.get('supplier'))
+    return render_template('comanda_noua.html', def_supplier=supp[0], accessories=acc)
 
 
 @app.route('/comanda_noua/new_order_done/', methods=['POST'])
 def new_order_done():
-    # supp = one_supplier(request.form.get('supp_id'))
-    # print(supp[0])
-    # acc = acc_by_supp(request.form.get('supp_id'))
-    print(request.form.get('accessories[]'))
-    print(request.form.get('qty[]'))
-    return render_template('PDF_template.html')
+    o = create_order()
+    ord_id = o[0][0]
+    list_acc = request.form.getlist('accessories[]')
+    list_qty = request.form.getlist('qty[]')
+    fill_order(list_acc, list_qty, ord_id)
+    ord_data = print_order(ord_id)
+    supp_data = one_supplier(request.form.get('supp_id'))
+    order_id = f"{ord_id:0>4}"
+    notes = 'Bravo, ai reusit!'
+    body = {
+        "data": {
+            "order_id": order_id,
+            "order": ord_data,
+            "supplier": supp_data,
+            "note": notes,
+            "today": date.today(),
+        }
+    }
+    outfile = f"order{date.today().year}-{ord_id:0>4}.pdf"
+    pdf_creator.convertHtmlToPdf(body, outfile)
+
+    return render_template('succes.html', order_id=order_id)
 
 
 @app.route('/accessories/')

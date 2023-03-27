@@ -25,6 +25,7 @@ Define all colors used in this template
   the running() function.
   */
   size:A4;
+  size: portrait;
   margin:8cm 0 3cm 0;
 
   @top-left{
@@ -357,7 +358,7 @@ invoice.
 The content inside the footer is aligned with the help of line-height 3cm and a
 flexbox for the child elements.
 */
-footer{
+@footer{
   height:3cm;
   line-height:3cm;
   padding:0 2cm;

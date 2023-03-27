@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <page size="A4"></page>
+
+  <link rel="stylesheet" href="static/template.css" />
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<!-- The header element will appear on the top of each page of this invoice document. -->
+<header>
+  <div class="headerSection">
+    <!-- As a logo we take an SVG element and add the name in a standard H1 element behind it. -->
+    <div class="logoAndName">
+
+    </div>
+    <!-- Details about the invoice are on the right top side of each page. -->
+    <div class="invoiceDetails">
+      <h2>Order no. 00{{ json_data.order_id }} </h2>
+      <p></p>
+    </div>
+  </div>
+  <!-- The two header rows are divided by an blue line, we use the HR element for this. -->
+  <hr />
+  <div class="headerSection">
+    <!-- The clients details come on the left side below the logo and company name. -->
+    <div>
+      <h3>Supplier</h3>
+      <p>
+        <b>{{json_data.supplier[0][0]}}</b>
+        <br />
+        {{json_data.supplier[0][1]}}
+        <br />
+        <a href="mailto:{{supplier[0][2]}}">
+          {{json_data.supplier[0][2]}}
+        </a>
+        <br />
+        {{json_data.supplier[0][3]}}
+      </p>
+    </div>
+    <!-- Additional details can be placed below the invoice details. -->
+    <div>
+      <h3>Due Date</h3>
+      <p>
+        <b id="today2">
+          <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("today2").innerHTML = day + "/" + month + "/" + year;
+          </script>
+        </b>
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- The footer contains the company's website and address. To align the address details we will use flexbox in the CSS style. -->
+<footer>
+    <a href="https://eurokyt.com">
+      eurokyt.com
+    </a>
+    <a href="mailto:office@eurokyt.com">
+      office@eurokyt.com
+    </a>
+    <span>
+      +40 264 433 057
+    </span>
+    <span>
+      Oasului str. no.118, Cluj Napoca 400268, Romania
+    </span>
+</footer>
+
+<!-- In the main section the table for the separate items is added. Also we add another table for the summary, so subtotal, tax and total amount. -->
+<main>
+  <table>
+    <!-- A THEAD element is used to ensure the header of the table is repeated if it consumes more than one page. -->
+    <thead>
+      <tr>
+        <th>Item Code</th>
+        <th>Description</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <!-- The single invoice items are all within the TBODY of the table. -->
+    <tbody>
+    {% for i in json_data.order %}
+      <tr>
+        <td>
+          <b> {{i[0]}}</b>
+          <br />
+        </td>
+        <td>
+          {{i[1]}}
+        </td>
+        <td>
+          {{i[2]}}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <!-- The summary table contains the subtotal, tax and total amount. -->
+  <table class="summary">
+    <tr class="total">
+      <th>
+        Delivery destination
+      </th>
+      <td>
+        Punto Finestre SPA
+      </td>
+    </tr>
+  </table>
+</main>
+<!-- Within the aside tag we will put the terms and conditions which shall be shown below the invoice table. -->
+<aside>
+  <!-- Before the terms and conditions we will add another blue divider line with the help of the HR tag. -->
+  <hr />
+  <div>
+    <div>
+      <b>Notes</b>
+      <p>
+        {{json_data.notes}}
+      </p>
+    </div>
+  </div>
+</aside>
+</html>

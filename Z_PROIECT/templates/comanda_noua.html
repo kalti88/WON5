@@ -10,26 +10,19 @@
         <hr>
         {% if def_supplier %}
             <div class="title">Alege furnizorul</div>
-            <input type="text" class="form_supp" name="supplier" placeholder={{def_supplier}} disabled>
+            <input type="text" class="form_supp" name="supplier" placeholder={{def_supplier[0]}} disabled>
         {% else %}
             <div class="title">Alege furnizorul</div>
             <table>
                 <tr>
                     <td>
-                        <select class="supp_list" name="supplier" id="select_supp" required onchange="change_supp_id()">
+                        <select class="supp_list" name="supplier" id="select_supp" required>
                             <option> Cauta furnizorul </option>
                             {% for i in supp %}
                                 <option value="{{i[1]}}">{{ i[0] }}</option>
                             {% endfor %}
                         </select>
                     </td>
-                    <td><input type="hidden" id="supp_id" class="edit" name="supp_id"></td>
-                    <script>
-                        document.getElementById('supp_id').value = document.getElementById('select_supp').value;
-                        function change_supp_id() {
-                            document.getElementById('supp_id').value = document.getElementById('select_supp').value;
-                            }
-                    </script>
                     <td>
                         <input class="foot_but3" type="submit" value="Alege">
                     </td>
@@ -40,6 +33,7 @@
     {% if def_supplier %}
     <form action="/comanda_noua/new_order_done/" method="post" class="insert-form">
         <div class="input-field">
+             <input id="supp_id" type="hidden" class="edit" name="supp_id" value="{{def_supplier[4]}}">
             <div class="table-responsive">
                 <table class="table table-bordered text-center" id="table_field">
                     <tr>
@@ -48,14 +42,14 @@
                         <th>Sterge</th>
                     </tr>
                     <tr>
-                            <td><select class="acc_list" name="accessories[]" required>
-                                <option> Selecteaza accesoriul </option>
-                                {% for i in accessories %}
-                                    <option>{{ i[0] }}</option>
-                                {% endfor %}
-                            </select></td>
-                            <td><input type="text" class="form-control" name="qty[]" required></td>
-                            <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
+                        <td><select class="acc_list" name="accessories[]" id="select_acc" required onchange="change_acc_id()">
+                            <option> Selecteaza accesoriul </option>
+                            {% for i in accessories %}
+                                <option value="{{i[3]}}">{{ i[0] }}</option>
+                            {% endfor %}
+                        </select></td>
+                        <td><input type="text" class="form-control" name="qty[]" required></td>
+                        <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
                     </tr>
                 </table>
                 <div class="row">
@@ -84,13 +78,9 @@ var cod_html = '<tr>'+
     '<td><select class="acc_list" name="accessories[]" required>'+
         '<option> Selecteaza accesoriul </option>'+
         '{% for i in accessories %}'+
-            '<option>{{i[0]}}</option>'+
+            '<option value="{{i[3]}}">{{i[0]}}</option>'+
         '{% endfor %}'+
     '</select></td>'+
-    '<td><input type="text" class="form-control" name="qty[]" required></td>'+
-    '<td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>'+
-    '{% else %}'+
-    '<td><input type="text" class="form-control" name="name[]" required></td>'+
     '<td><input type="text" class="form-control" name="qty[]" required></td>'+
     '<td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>'+
     '{% endif %}'+
