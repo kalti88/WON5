@@ -39,4 +39,4 @@ def convert_html_to_pdf(body_data, outputf_name):
 
 if __name__ == "__main__":
     pisa.showLogging()
-    convertHtmlToPdf(body, outputfilename)
+    convert_html_to_pdf(body, outputfilename)
