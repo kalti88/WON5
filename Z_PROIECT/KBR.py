@@ -499,7 +499,7 @@ def new_order_done():
         }
     }
     outfile = f"order {ord_data[0][3]}.pdf"
-    pdf_creator.convertHtmlToPdf(body, outfile)
+    pdf_creator.convert_html_to_pdf(body, outfile)
 
     return render_template('succes.html', order_id=ord_id)
 
@@ -519,7 +519,7 @@ def order_open_pdf(oi_id):
         }
     }
     outfile = f"order {ord_data[0][3]}.pdf"
-    pdf_creator.convertHtmlToPdf(body, outfile)
+    pdf_creator.convert_html_to_pdf(body, outfile)
     subprocess.Popen([outfile], shell=True)
     return order(oi_id)
 

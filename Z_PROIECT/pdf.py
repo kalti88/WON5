@@ -21,22 +21,22 @@ body = {
 }
 
 
-outputFilename = "invoice.pdf"
+outputfilename = "invoice.pdf"
 
 
-def convertHtmlToPdf(body, outputFilename):
-    sourceHtml = template.render(json_data=body["data"])
-    resultFile = open(outputFilename, "w+b")
-    pisaStatus = pisa.CreatePDF(
-            src=sourceHtml,
-            dest=resultFile)
+def convert_html_to_pdf(body_data, outputf_name):
+    sourcehtml = template.render(json_data=body_data["data"])
+    resultfile = open(outputf_name, "w+b")
+    pisastatus = pisa.CreatePDF(
+            src=sourcehtml,
+            dest=resultfile)
 
-    resultFile.close()
+    resultfile.close()
 
-    print(pisaStatus.err, type(pisaStatus.err))
-    return pisaStatus.err
+    print(pisastatus.err, type(pisastatus.err))
+    return pisastatus.err
 
 
 if __name__ == "__main__":
     pisa.showLogging()
-    convertHtmlToPdf(body, outputFilename)
+    convertHtmlToPdf(body, outputfilename)
