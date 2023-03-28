@@ -308,6 +308,9 @@ body > nav{
 
 #success {
     font-family: Candara;
-    font-size: 15px;
+    font-size: 30px;
     font_weight: bold;
+    text-align: center;
+    margin-top: 10vh;
+    color: #6ad498;
 }
