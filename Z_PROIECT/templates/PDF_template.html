@@ -11,7 +11,7 @@
             }
             @frame footer_frame {
               -pdf-frame-content: footer_content;
-               top: 772pt; margin-left: 1cm; margin-right: 1cm; height: 2cm;
+               bottom: 10pt; margin-left: 1cm; margin-right: 1cm; height: 2cm;
             }
           }
           body{
@@ -51,6 +51,11 @@
             text-align: left;
             padding-left: 0.5cm;
           }
+          .l1 {
+            text-align: left;
+            padding-left: 0.5cm;
+            width: 10cm;
+          }
           .central {
               border: 0.5mm, solid;
               padding: 1mm;
@@ -62,6 +67,8 @@
               border: 0.5mm, solid;
               padding-top: 2mm;
               padding-bottom:2mm;
+              margin-top: 0;
+              margin-bottom: 0;
           }
           .total {
               text-align: left;
@@ -72,6 +79,26 @@
           }
           #headerContent {
               background-color: #B8E6F1;
+              margin-top: 0;
+          }
+          .center {
+            text-align: center;
+            color: black;
+            font-family: 'Candara';
+            font-size: 10px;
+            padding: 2px;
+          }
+          .c2 {
+            padding: 2px;
+            margin: 0;
+          }
+          #notes {
+            min-height: 2cm;
+          }
+          #notes p{
+            padding: 0;
+            margin: 2pt;
+            margin-top: 0;
           }
       </style>
 	</head>
@@ -85,9 +112,15 @@
           <h1><img src='static/eurokyt21.png'/></h1>
         </div>
         </td>
+        <td class="center">
+          <h1 class="c2">SC EUROKYT SRL</h1>
+          <h1 class="c2">Oasului str. no.118</h1>
+          <h1 class="c2">Cluj Napoca, Romania</h1>
+          <h1 class="c2">VAT no. RO14367512</h1>
+        </td>
         <td class="r">
         <div class="invoiceDetails">
-          <h2>Order no. 00{{ json_data.order_id }} </h2>
+          <h2>Order no. {{ json_data.order[0][3] }} </h2>
           <p></p>
         </div>
         </td>
@@ -101,7 +134,7 @@
               <h3>Due Date</h3>
               <p>
                 <b id="today2">
-                  {{json_data.today}}
+                  {{json_data.order[0][5]}}
                 </b>
               </p>
             </div>
@@ -132,8 +165,8 @@
   <table class="central">
     <thead>
       <tr>
-        <th>Item Code</th>
-        <th>Description</th>
+        <th class="l">Item Code</th>
+        <th class="l1">Description</th>
         <th>Qty</th>
       </tr>
     </thead>
@@ -143,7 +176,7 @@
         <td class="l">
           <b> {{i[0]}}</b>
         </td>
-        <td class="l">
+        <td class="l1">
           {{i[1]}}
         </td>
         <td class="r">
@@ -155,32 +188,28 @@
   </table>
   <table class="summary">
     <tr>
-      <th class="total">
-        Delivery destination
-      </th>
-    </tr>
-    <tr>
       <td class="total">
-        <b>Punto Finestre SPA</b><br/>
-        Ferri str. no. 24-26<br/>
+        <b>Delivery destination</b><br>
+        <b>Punto Finestre SPA</b><br>
+        Ferri str. no. 24-26<br>
         Borgosatollo, Italy
       </td>
     </tr>
   </table>
-<aside>
+</main>
+<footer>
+  <aside>
   <hr />
   <div>
-    <div>
+    <div id="notes">
       <b>Notes</b>
       <p>
-        {{json_data.notes}}
+        {{json_data.note}}
       </p>
     </div>
   </div>
    <hr />
 </aside>
-</main>
-<footer>
   <div id="footerContent">
     <a href="https://eurokyt.com">
       www.eurokyt.com

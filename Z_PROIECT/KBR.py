@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request
 import psycopg2
-import pdfkit
-import jinja2
 import pdf as pdf_creator
 from datetime import date
+import subprocess
 
 
 conn = None
@@ -121,9 +120,9 @@ try:
                         accessories a
                     JOIN
                         supplier s on a.supp_id = s.id
-                    WHERE cod_acc ilike any (%s)
-                        or description  ilike any (%s)
-                        or cod_supp  ilike any (%s)            
+                    WHERE a.cod_acc ilike any (%s)
+                        or a.description  ilike any (%s)
+                        or a.cod_supp  ilike any (%s)            
                     order by a.cod_acc;
                 '''
 
@@ -302,13 +301,18 @@ try:
         query = ''' select
                         a.cod_acc,
                         a.cod_supp,
-                        o.qty
+                        o.qty,
+                        concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) as ord_name,
+                        oi.supp_id,
+                        to_char (oi.created_at, 'DD-MM-YYYY')
                     from 
                         orders o
                     join 
                         order_id oi on o.ord_id = oi.id
                     join
                         accessories a on o.acc_id = a.id
+                    join
+                        supplier s on oi.supp_id = s.id
                     where oi.id = %s
                     order by o.id;
                 '''
@@ -320,11 +324,10 @@ try:
     def show_orders():
         c = conn.cursor()
         query = '''select
-                        o.id,
+                        concat(to_char (o.created_at, 'YY'), '-', to_char(o.id, 'fm0000')) as ord_name,
                         s.supplier,
-                        date_part('day', O.created_at),
-                        date_part('month',O.created_at),
-                        date_part('year',O.created_at)
+                        to_char (o.created_at, 'DD-MM-YYYY'),
+                        o.id
                     from 
                         order_id o
                     join 
@@ -340,14 +343,12 @@ try:
     def show_order(oi_id):
         c = conn.cursor()
         query = '''select
-                        oi.id,
+                        concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) as ord_name,
                         a.cod_acc,
                         a.description,
                         o.qty,
                         s.supplier,
-                        date_part ('day', oi.created_at),
-                        date_part ('month', oi.created_at),
-                        date_part ('year', oi.created_at),
+                        to_char (oi.created_at, 'DD-MM-YYYY'),
                         a.cod_supp
                     from 
                         orders o
@@ -368,11 +369,12 @@ try:
     def search_ord(s1, s2, s3):
         c = conn.cursor()
         query = '''select
-                        oi.id,
+                        concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) as ord_name,
                         a.cod_acc,
                         a.description,
                         o.qty,
-                        s.supplier
+                        s.supplier,
+                        oi.id
                     from 
                         orders o
                     join 
@@ -452,10 +454,10 @@ def orders():
 @app.route('/comenzi/<oi_id>/')
 def order(oi_id):
     one_ord = show_order(oi_id)
-    return render_template('order.html', orders=one_ord)
+    return render_template('order.html', orders=one_ord, order_id=oi_id)
 
 
-@app.route('/accessories/search/', methods=['POST'])
+@app.route('/comenzi/search/', methods=['POST'])
 def search_orders():
     s = request.form.get('search')
     ls = s.split(' ')
@@ -473,7 +475,6 @@ def new_order():
 @app.route('/comanda_noua/furnizor/', methods=['POST'])
 def new_order2():
     supp = one_supplier(request.form.get('supplier'))
-    print(request.form.get('supplier'))
     acc = acc_by_supp(request.form.get('supplier'))
     return render_template('comanda_noua.html', def_supplier=supp[0], accessories=acc)
 
@@ -487,21 +488,40 @@ def new_order_done():
     fill_order(list_acc, list_qty, ord_id)
     ord_data = print_order(ord_id)
     supp_data = one_supplier(request.form.get('supp_id'))
-    order_id = f"{ord_id:0>4}"
     notes = 'Bravo, ai reusit!'
     body = {
         "data": {
-            "order_id": order_id,
+            "order_id": ord_id,
             "order": ord_data,
             "supplier": supp_data,
             "note": notes,
             "today": date.today(),
         }
     }
-    outfile = f"order{date.today().year}-{ord_id:0>4}.pdf"
+    outfile = f"order {ord_data[0][3]}.pdf"
     pdf_creator.convertHtmlToPdf(body, outfile)
 
-    return render_template('succes.html', order_id=order_id)
+    return render_template('succes.html', order_id=ord_id)
+
+
+@app.route('/comenzi/open_PDF/<oi_id>/')
+def order_open_pdf(oi_id):
+    ord_data = print_order(oi_id)
+    supp_data = one_supplier(ord_data[0][4])
+    notes = 'Bravo, ai reusit!'
+    body = {
+        "data": {
+            "order_id": oi_id,
+            "order": ord_data,
+            "supplier": supp_data,
+            "note": notes,
+            "today": date.today(),
+        }
+    }
+    outfile = f"order {ord_data[0][3]}.pdf"
+    pdf_creator.convertHtmlToPdf(body, outfile)
+    subprocess.Popen([outfile], shell=True)
+    return order(oi_id)
 
 
 @app.route('/accessories/')
@@ -540,7 +560,6 @@ def search_acc():
     s = request.form.get('search')
     ls = s.split(' ')
     sch = '{"%' + '%", "%'.join(ls) + '%"}'
-    print(sch)
     table_acc = search_accessory(sch, sch, sch)
     print(table_acc)
     return render_template('database.html', accessories=table_acc)

@@ -282,3 +282,32 @@ body > nav{
 
 #remove:hover {
     background-color: #ccc;
+}
+
+.ord {
+    width: 12vw;
+    margin: 3px;
+}
+
+.ord2 {
+    padding-left: 2vw;
+}
+
+
+#t_h{
+    font-family: Candara;
+    font-size: 15px;
+    font_weight: bold;
+}
+
+#ord_h {
+    background-color: #76ECA9;
+    border-radius: 8px;
+    width: 100%;
+}
+
+#success {
+    font-family: Candara;
+    font-size: 15px;
+    font_weight: bold;
+}

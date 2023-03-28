@@ -4,18 +4,24 @@
 
 {% block content %}
     <div id="database_div">
-        <div> Numar comanda: {{orders[0][0]}}   Furnizor: {{orders[0][4]}}    Data: {{orders[0][5]-orders[0][6]-orders[0][7]}}</div>
+        <table id="ord_h">
+            <tr>
+                <th class="ord">Numar comanda: {{orders[0][0]}}</th><th class="ord">Furnizor: {{orders[0][4]}}</th><th class="ord">Data: {{orders[0][5]}}</th>
+            </tr>
+        </table>
+        <br>
         <table id="database_table">
             <tr>
                 <th>Cod accessoriu</th><th>Descriere</th><th>Descriere furnizor</th><th>Cantitate</th>
             </tr>
                 {% for i in orders %}
                     <tr>
-                        <td>{{i[1]}}</td><td>{{i[2]}}</td><td>{{i[3]}}</td><td>{{i[8]}}</td>
+                        <td class="ord2">{{i[1]}}</td><td>{{i[2]}}</td><td class="ord">{{i[6]}}</td><td class="ord2">{{i[3]}}</td>
                     </tr>
                 {% endfor %}
             <tr>
-                    <td><button class="foot_but2" onclick="window.location.href='/comenzi/'">Inapoi la comenzi</button></td>
+                <td><button class="foot_but2" onclick="window.location.href='/comenzi/'">Inapoi la comenzi</button></td>
+                <td><button class="foot_but2" onclick="window.location.href='/comenzi/open_PDF/{{order_id}}/'">Deschide in format PDF</button></td>
             </tr>
         </table>
     </div>

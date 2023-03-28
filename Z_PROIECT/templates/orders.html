@@ -6,20 +6,20 @@
     <div id="database_div">
         <table id="database_table">
             <tr>
-                <th>Numar comada</th><th>Furnizor</th><th>Data</th>
+                <th class="ord">Numar comada</th><th class="ord">Furnizor</th><th class="ord">Data</th>
             </tr>
             {% if orders %}
                 {% for i in orders %}
                     <tr>
-                        <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}-{{i[3]}}-{{i[4]}}</td>
-                        <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[0]}}/'">Vizualizeaza</button></td>
+                        <td class="ord2">{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}</td>
+                        <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[3]}}/'">Vizualizeaza</button></td>
                     </tr>
                 {% endfor %}
             {% else %}
                 {% for i in search_orders %}
                     <tr>
                         <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}-{{i[3]}}-{{i[4]}}</td>
-                        <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[0]}}/'">Vizualizeaza</button></td>
+                        <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[5]}}/'">Vizualizeaza</button></td>
                     </tr>
                 {% endfor %}
             {% endif %}
@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block footer %}
-<form class="fo" action="/accessories/search/" method="POST">
+<form class="fo" action="/comenzi/search/" method="POST">
     <input id="sh" type="text" name="search" placeholder="Search">
     <input class="foot_but" type="submit" name="search" value="Cauta">
 </form>
