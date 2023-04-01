@@ -3,6 +3,12 @@
 {% block title %}KBR Orders{% endblock %}
 
 {% block content %}
+<style>
+    .vertical-nav ul a.menu_orders {
+        background-color: blue;
+        color: white;
+    }
+</style>
     <div id="database_div">
         <table id="database_table">
             <tr>
@@ -18,7 +24,7 @@
             {% else %}
                 {% for i in search_orders %}
                     <tr>
-                        <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}-{{i[3]}}-{{i[4]}}</td>
+                        <td>{{i[0]}}</td><td>{{i[1]}}</td><td>{{i[2]}}</td>
                         <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[5]}}/'">Vizualizeaza</button></td>
                     </tr>
                 {% endfor %}
@@ -29,7 +35,11 @@
 
 {% block footer %}
 <form class="fo" action="/comenzi/search/" method="POST">
-    <input id="sh" type="text" name="search" placeholder="Search">
+    {% if search %}
+    <input class="sh" type="text" name="search" placeholder={{search}}>
+    {% else %}
+    <input class="sh" type="text" name="search" placeholder="Search">
+    {% endif %}
     <input class="foot_but" type="submit" name="search" value="Cauta">
 </form>
 {% endblock %}

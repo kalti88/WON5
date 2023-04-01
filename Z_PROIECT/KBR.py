@@ -366,14 +366,15 @@ try:
         return one_ord
 
 
-    def search_ord(s1, s2, s3):
+    def search_ord(s1, s2, s3, s4):
         c = conn.cursor()
         query = '''select
                         concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) as ord_name,
+                        s.supplier,
+                        to_char (oi.created_at, 'DD-MM-YYYY'),
                         a.cod_acc,
                         a.description,
                         o.qty,
-                        s.supplier,
                         oi.id
                     from 
                         orders o
@@ -386,10 +387,11 @@ try:
                     where a.cod_acc ilike any (%s)
                         or a.description ilike any (%s)
                         or s.supplier ilike any (%s)
+                        or concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) ilike any (%s)
                     order by o.id;
                    '''
 
-        c.execute(query, (s1, s2, s3,))
+        c.execute(query, (s1, s2, s3, s4,))
         supp = c.fetchall()
         c.close()
         return supp
@@ -439,10 +441,10 @@ def save_new_supplier():
 @app.route('/furnizori/search/', methods=['POST'])
 def search_supp():
     s = request.form.get('search')
-    ls = s.split(' ')
+    ls = s.split()
     sch = '{"%' + '%", "%'.join(ls) + '%"}'
     table_supp = search_supplier(sch, sch, sch, sch)
-    return render_template('furnizori.html', supplier=table_supp)
+    return render_template('furnizori.html', supplier=table_supp, search=s)
 
 
 @app.route('/comenzi/')
@@ -460,10 +462,10 @@ def order(oi_id):
 @app.route('/comenzi/search/', methods=['POST'])
 def search_orders():
     s = request.form.get('search')
-    ls = s.split(' ')
+    ls = s.split()
     sch = '{"%' + '%", "%'.join(ls) + '%"}'
-    all_ord = search_ord(sch, sch, sch)
-    return render_template('orders.html', search_orders=all_ord)
+    all_ord = search_ord(sch, sch, sch, sch)
+    return render_template('orders.html', search_orders=all_ord, search=s)
 
 
 @app.route('/comanda_noua/')
@@ -501,7 +503,7 @@ def new_order_done():
     outfile = f"order {ord_data[0][3]}.pdf"
     pdf_creator.convert_html_to_pdf(body, outfile)
 
-    return render_template('succes.html', order_id=ord_id)
+    return order(ord_id)
 
 
 @app.route('/comenzi/open_PDF/<oi_id>/')
@@ -558,11 +560,11 @@ def save_new_accessory():
 @app.route('/accessories/search/', methods=['POST'])
 def search_acc():
     s = request.form.get('search')
-    ls = s.split(' ')
+    ls = s.split()
     sch = '{"%' + '%", "%'.join(ls) + '%"}'
     table_acc = search_accessory(sch, sch, sch)
     print(table_acc)
-    return render_template('database.html', accessories=table_acc)
+    return render_template('database.html', accessories=table_acc, search=s)
 
 
 if __name__ == '__main__':

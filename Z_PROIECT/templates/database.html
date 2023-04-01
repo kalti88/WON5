@@ -3,6 +3,12 @@
 {% block title %}KBR Orders{% endblock %}
 
 {% block content %}
+<style>
+    .vertical-nav ul a.menu_accessories {
+        background-color: blue;
+        color: white;
+    }
+</style>
     <div id="database_div">
         <table id="database_table">
             <tr>
@@ -20,7 +26,11 @@
 
 {% block footer %}
 <form class="fo" action="/accessories/search/" method="POST">
-    <input id="sh" type="text" name="search" placeholder="Search">
+    {% if search %}
+    <input class="sh" type="text" name="search" placeholder={{search}}>
+    {% else %}
+    <input class="sh" type="text" name="search" placeholder="Search">
+    {% endif %}
     <input class="foot_but" type="submit" value="Cauta">
 </form>
     <button class="foot_but" onclick="window.location.href='/accessories/new/'">Nou</button>

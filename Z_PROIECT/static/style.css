@@ -68,7 +68,7 @@ body > nav{
     padding: 10px;
 }
 
-.vertical-nav a:hover {
+.vertical-nav ul a:hover {
     background-color: #ccc;
 }
 
@@ -174,7 +174,7 @@ body > nav{
     font-size: 15px;
 }
 
-#sh {
+.sh {
     width: 20vw;
     padding: 5px;
     margin: 10px;

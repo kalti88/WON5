@@ -3,6 +3,12 @@
 {% block title %}KBR Orders{% endblock %}
 
 {% block content %}
+<style>
+    .vertical-nav ul a.menu_orders {
+        background-color: blue;
+        color: white;
+    }
+</style>
     <div id="database_div">
         <table id="ord_h">
             <tr>
@@ -28,8 +34,5 @@
 {% endblock %}
 
 {% block footer %}
-<form class="fo" action="/accessories/search/" method="POST">
-    <input id="sh" type="text" name="search" placeholder="Search">
-    <input class="foot_but" type="submit" name="search" value="Cauta">
-</form>
+
 {% endblock %}

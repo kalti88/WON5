@@ -3,6 +3,12 @@
 {% block title %}KBR Supplier{% endblock %}
 
 {% block content %}
+<style>
+    .vertical-nav ul a.menu_supplier {
+        background-color: blue;
+        color: white;
+    }
+</style>
     <div id="database_div">
         {% if supplier %}
         <form class="fo" action="/furnizori/save/" method="post">
