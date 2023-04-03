@@ -29,25 +29,29 @@
             </tr>
         </table>
         {% else %}
-        <form class="fo" action="/accessories/new/save/" method="post">
+        <form class="fo" action="/accessories/new/save/" method="post" id="acc_form" onsubmit="return validation2()">
             <table id="database_table">
                 <tr>
-                    <th>Cod accessoriu</th><td><input type="text" class="edit" name="cod_acc" value="{{accessory[0]}}"></td>
+                    <th>Cod accessoriu</th><td><input type="text" class="edit" name="cod_acc" id="cod_acc" value="{{accessory[0]}}"></td>
+                    <td><div id="answer_cod_acc" class="color-red"></div></td>
                 </tr>
                 <tr>
-                    <th>Cod furnizor</th><td><input type="text" class="edit" name="cod_supp" value="{{accessory[1]}}"></td>
+                    <th>Cod furnizor</th><td><input type="text" class="edit" name="cod_supp" id="cod_supp" value="{{accessory[1]}}"></td>
+                    <td><div id="answer_cod_supp" class="color-red"></div></td>
                 </tr>
                 <tr>
-                    <th>Descriere</th><td><input type="text" class="edit" name="description" value="{{accessory[2]}}"></td>
+                    <th>Descriere</th><td><input type="text" class="edit" name="description" id="description" value="{{accessory[2]}}"></td>
+                    <td><div id="answer_description" class="color-red"></div></td>
                 </tr>
                 <tr>
                     <th>Furnizor</th>
-                    <td><select class="supp_acc" name="supplier" id="select_supp" required onchange="change_supp_id()">
+                    <td><select class="supp_acc" name="supplier" id="select_supp" onchange="change_supp_id()">
                             <option selected></option>
                             {% for i in suppliers %}
                                 <option value="{{ i[1] }}">{{ i[0] }}</option>
                             {% endfor %}
                         </select></td>
+                    <td><div id="answer_select_supp" class="color-red"></div></td>
                 </tr>
                 <tr>
                     <td><input type="hidden" id="supp_id" class="edit" name="supp_id"></td>
@@ -63,6 +67,7 @@
                     <td><button type="reset" class="foot_but">Reseteaza</button><button type="submit" class="foot_but">Salveaza</button></td>
                 </tr>
             </table>
+            <script src="{{ url_for('static', filename='valid.js') }}"></script>
         </form>
         {% endif %}
     </div>

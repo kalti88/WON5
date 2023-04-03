@@ -26,6 +26,9 @@
                     </tr>
                 {% endfor %}
             <tr>
+                <td colspan="2"><textarea class="note" name="note" disabled>{{orders[0][7]}}</textarea></td>
+            </tr>
+            <tr>
                 <td><button class="foot_but2" onclick="window.location.href='/comenzi/'">Inapoi la comenzi</button></td>
                 <td><button class="foot_but2" onclick="window.location.href='/comenzi/open_PDF/{{order_id}}/'">Deschide in format PDF</button></td>
             </tr>

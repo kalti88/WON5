@@ -32,25 +32,30 @@
                 </tr>
             </table>
         {% else %}
-            <form class="fo" action="/furnizori/new/save/" method="post">
+            <form class="fo" action="/furnizori/new/save/" method="post" id="supp_form" name="supp_form" onsubmit="return validation()">
             <table id="database_table">
                 <tr>
-                    <th>Nume furnizor</th><td><input type="text" class="edit" name="supplier" placeholder="Nume furnizor"></td>
+                    <th>Nume furnizor</th><td><input type="text" class="edit" name="supplier" placeholder="Nume furnizor" id="supplier"></td>
+                    <td><div id="answer_supplier" class="color-red"></div></td>
                 </tr>
                 <tr>
-                    <th>Adresa furnizor</th><td><input type="text" class="edit" name="address" placeholder="Adresa furnizor"></td>
+                    <th>Adresa furnizor</th><td><input type="text" class="edit" name="address" placeholder="Adresa furnizor" id="address"></td>
+                    <td><div id="answer_address" class="color-red"></div></td>
                 </tr>
                 <tr>
-                    <th>E-mail furnizor</th><td><input type="text" class="edit" name="email_address" placeholder="E-mail furnizor"></td>
+                    <th>E-mail furnizor</th><td><input type="text" class="edit" name="email_address" placeholder="E-mail furnizor" id="email"></td>
+                    <td><div id="answer_email" class="color-red"></div></td>
                 </tr>
                 <tr>
-                    <th>Telefon furnizor</th><td><input type="text" class="edit" name="phone" placeholder="Telefon furnizor"></td>
+                    <th>Telefon furnizor</th><td><input type="text" class="edit" name="phone" placeholder="Telefon furnizor" id="phone"></td>
+                    <td><div id="answer_phone" class="color-red"></div></td>
                 </tr>
                 <tr>
                     <td><button type="button" class="foot_but2" onclick="window.location.href='/furnizori/'">Inapoi la furnizori</button></td>
                     <td><button type="reset" class="foot_but">Reseteaza</button><button type="submit" class="foot_but">Salveaza</button></td>
                 </tr>
             </table>
+                <script src="{{ url_for('static', filename='valid.js') }}"></script>
         </form>
         {% endif %}
     </div>

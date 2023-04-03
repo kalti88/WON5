@@ -265,16 +265,17 @@ try:
         c.close()
         return supp
 
-    def create_order():
+    def create_order(notes):
         c = conn.cursor()
         query = """ insert into order_id
                         (id,
                         created_at,
-                        supp_id)
-                    values(default, default, %s)
+                        supp_id,
+                        notes)
+                    values(default, default, %s, %s)
                     returning id;
                 """
-        c.execute(query, (request.form.get('supp_id'),))
+        c.execute(query, (request.form.get('supp_id'), notes,))
         conn.commit()
         ord_id = c.fetchall()
         c.close()
@@ -304,7 +305,8 @@ try:
                         o.qty,
                         concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) as ord_name,
                         oi.supp_id,
-                        to_char (oi.created_at, 'DD-MM-YYYY')
+                        to_char (oi.created_at, 'DD-MM-YYYY'),
+                        oi.notes
                     from 
                         orders o
                     join 
@@ -349,7 +351,8 @@ try:
                         o.qty,
                         s.supplier,
                         to_char (oi.created_at, 'DD-MM-YYYY'),
-                        a.cod_supp
+                        a.cod_supp,
+                        oi.notes
                     from 
                         orders o
                     join 
@@ -483,14 +486,14 @@ def new_order2():
 
 @app.route('/comanda_noua/new_order_done/', methods=['POST'])
 def new_order_done():
-    o = create_order()
+    notes = request.form.get('note')
+    o = create_order(notes)
     ord_id = o[0][0]
     list_acc = request.form.getlist('accessories[]')
     list_qty = request.form.getlist('qty[]')
     fill_order(list_acc, list_qty, ord_id)
     ord_data = print_order(ord_id)
     supp_data = one_supplier(request.form.get('supp_id'))
-    notes = 'Bravo, ai reusit!'
     body = {
         "data": {
             "order_id": ord_id,
@@ -510,7 +513,7 @@ def new_order_done():
 def order_open_pdf(oi_id):
     ord_data = print_order(oi_id)
     supp_data = one_supplier(ord_data[0][4])
-    notes = 'Bravo, ai reusit!'
+    notes = ord_data[0][6]
     body = {
         "data": {
             "order_id": oi_id,

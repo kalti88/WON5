@@ -314,3 +314,18 @@ body > nav{
     margin-top: 10vh;
     color: #6ad498;
 }
+
+.color-red{
+    color: red;
+    font-family: Candara;
+}
+
+.note {
+    width: 25vw;
+    height: 10vh;
+    padding: 5px;
+    margin: 20px;
+    font-family: Candara;
+    color: black;
+    font-size: 15px;
+}
