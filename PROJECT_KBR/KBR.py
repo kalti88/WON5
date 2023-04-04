@@ -341,6 +341,25 @@ try:
         c.close()
         return all_ord
 
+    def show_five_orders():
+        c = conn.cursor()
+        query = '''select
+                        concat(to_char (o.created_at, 'YY'), '-', to_char(o.id, 'fm0000')) as ord_name,
+                        s.supplier,
+                        to_char (o.created_at, 'DD-MM-YYYY'),
+                        o.id
+                    from 
+                        order_id o
+                    join 
+                        supplier s on o.supp_id = s.id
+                    order by o.created_at desc
+                    limit 10;
+                '''
+        c.execute(query)
+        five_ord = c.fetchall()
+        c.close()
+        return five_ord
+
 
     def show_order(oi_id):
         c = conn.cursor()
@@ -408,7 +427,8 @@ app = Flask('KBH')
 @app.route('/')
 @app.route('/home/')
 def home():
-    return render_template('home.html')
+    five_orders = show_five_orders()
+    return render_template('home.html', orders=five_orders)
 
 
 @app.route('/furnizori/')

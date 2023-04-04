@@ -11,7 +11,7 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <div class="container">
-    <form action="/comanda_noua/furnizor/" method="post" class="insert-form">
+    <form action="/comanda_noua/furnizor/" method="post" class="insert-form" id="ord_supp" onsubmit="return valid_supp_ord()">
         <h1 class="text-center">Creeaza o comanda noua</h1>
         <hr>
         {% if def_supplier %}
@@ -33,11 +33,13 @@
                         <input class="foot_but3" type="submit" value="Alege">
                     </td>
                 </tr>
+                <tr><td><div id="answer_supp_ord" class="color-red"></div></td></tr>
             </table>
         {% endif %}
+        <script src="{{ url_for('static', filename='valid.js') }}"></script>
     </form>
     {% if def_supplier %}
-    <form action="/comanda_noua/new_order_done/" method="post" class="insert-form">
+    <form action="/comanda_noua/new_order_done/" method="post" class="insert-form" id="ord_acc">
         <div class="input-field">
              <input id="supp_id" type="hidden" class="edit" name="supp_id" value="{{def_supplier[4]}}">
             <div class="table-responsive">
@@ -48,18 +50,21 @@
                         <th>Sterge</th>
                     </tr>
                     <tr>
-                        <td><select class="acc_list" name="accessories[]" id="select_acc" required onchange="change_acc_id()">
+                        <td><select class="acc_list" name="accessories[]" id="select_acc">
                             <option> Selecteaza accesoriul </option>
                             {% for i in accessories %}
                                 <option value="{{i[3]}}">{{ i[0] }}</option>
                             {% endfor %}
                         </select></td>
-                        <td><input type="text" class="form-control" name="qty[]" required></td>
+                        <td><input type="text" class="form-control" name="qty[]" id="acc_qty"></td>
                         <td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>
                     </tr>
                 </table>
                 <div class="row">
                     <table>
+                        <tr>
+                            <td><div id="answer_acc_ord" class="color-red"></div></td>
+                        </tr>
                         <tr>
                             <th>
                                 <div class="col-12 text-right">
@@ -68,7 +73,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <td><textarea class="note" name="note" ></textarea></td>
+                            <td><textarea class="note" name="note"></textarea></td>
                         </tr>
                         <tr>
                             <th>
@@ -84,20 +89,25 @@
     </form>
 </div>
 <script>
-var cod_html = '<tr>'+
-    '{% if def_supplier %}'+
-    '<td><select class="acc_list" name="accessories[]" required>'+
+var cod_html = '{% if def_supplier %}'+
+    '<tr>'+
+    '<td><select class="acc_list" name="accessories[]" id="select_acc">'+
         '<option> Selecteaza accesoriul </option>'+
         '{% for i in accessories %}'+
             '<option value="{{i[3]}}">{{i[0]}}</option>'+
         '{% endfor %}'+
     '</select></td>'+
-    '<td><input type="text" class="form-control" name="qty[]" required></td>'+
+    '<td><input type="text" class="form-control" name="qty[]" id="acc_qty"></td>'+
     '<td><input class="btn btn-danger" name="remove" id="remove" value="Sterge" type="button"></td>'+
-    '{% endif %}'+
-    '</tr>';
+    '</tr>'+
+    '{% endif %}';
 </script>
 <script type="text/javascript" src="{{ url_for('static', filename='KBR_orders.js') }}"></script>
+<script>
+    var the_form = document.getElementById("ord_acc")
+    the_form.addEventListener("submit", valid_acc_ord)
+    the_form.addEventListener("submit", valid_acc_qty)
+</script>
 {% endif %}
 {% endblock %}
 

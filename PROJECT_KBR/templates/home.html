@@ -12,6 +12,19 @@
     <div id="h_div">
         <a id="h_button" href="/comanda_noua/">Creeaza o comanda noua</a>
     </div>
+    <div class="title1">Comenzi recente:</div>
+    <hr>
+    <table id="database_table_home">
+        <tr>
+            <th class="ord">Numar comada</th><th class="ord">Furnizor</th><th class="ord">Data</th>
+        </tr>
+        {% for i in orders %}
+            <tr>
+                <td class="ord3">{{i[0]}}</td><td class="ord3">{{i[1]}}</td><td class="ord3">{{i[2]}}</td>
+                <td><button class="foot_but3" onclick="window.location.href='/comenzi/{{i[3]}}/'">Vizualizeaza</button></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
 
 {% block footer %}

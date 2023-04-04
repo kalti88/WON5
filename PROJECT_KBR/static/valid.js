@@ -157,4 +157,42 @@ function validation2() {
     }
 }
 
+function valid_supp_ord() {
+    let x = document.forms["ord_supp"]["select_supp"].value;
+    const elem = document.getElementById('answer_supp_ord');
+    if (x == "Cauta furnizorul") {
+        elem.innerHTML = "Nu ai selectat furnizorul!";
+        return false;
+    }
+    else {
+        elem.innerHTML = "";
+    }
+    return true;
+}
+
+function valid_acc_ord(event){
+    var x=document.getElementsByClassName('acc_list');
+    for(var i = 0; i <x.length; i++){
+        if (x[i].value == null || x[i].value == "" || x[i].value == 'Selecteaza accesoriul'){
+            x[i].focus();
+            alert("acc")
+//            document.getElementById('answer_acc_ord').innerHtml = "Alege accesoriul!";
+            event.preventDefault();
+            return false;
+        }
+    }
+}
+
+function valid_acc_qty(event) {
+    var x=document.getElementsByClassName('form-control');
+    for(var i = 0; i <x.length; i++){
+        if (x[i].value == null || x[i].value == ""){
+            x[i].focus();
+            alert("qty");
+            event.preventDefault();
+            return false;
+        }
+    }
+}
+
 
