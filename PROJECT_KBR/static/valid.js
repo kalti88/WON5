@@ -170,27 +170,70 @@ function valid_supp_ord() {
     return true;
 }
 
+function checkInp(x) {
+  var regex=/^[0-9]+$/;
+  if (x.value.match(regex)) {
+    return true;
+  } else {
+    return false;
+    }
+}
+
 function valid_acc_ord(event){
-    var x=document.getElementsByClassName('acc_list');
+    var x = document.getElementsByClassName('acc_list');
+    var valid = true;
     for(var i = 0; i <x.length; i++){
         if (x[i].value == null || x[i].value == "" || x[i].value == 'Selecteaza accesoriul'){
-            x[i].focus();
-            alert("acc")
-//            document.getElementById('answer_acc_ord').innerHtml = "Alege accesoriul!";
+            //x[i].focus();
+            x[i].style.border = "1px solid rgba(255, 0, 0, 0.7)"
+            valid = false;
+            //alert("acc")
             event.preventDefault();
-            return false;
+        } else {
+            x[i].style.border = "1px solid #000"
+            valid = true;
         }
     }
+    if (!valid) {
+        document.getElementById("answer_acc_ord").innerHTML = "Alege accesoriul!";
+    } else {
+        document.getElementById("answer_acc_ord").innerHTML = "";
+      }
 }
 
 function valid_acc_qty(event) {
     var x=document.getElementsByClassName('form-control');
+    var valid = true;
+    var valid2 = true;
     for(var i = 0; i <x.length; i++){
+          console.log(x[i].value);
         if (x[i].value == null || x[i].value == ""){
-            x[i].focus();
-            alert("qty");
+            //x[i].focus();
+            x[i].style.border = "1px solid rgba(255, 0, 0, 0.7)"
+            valid = false;
+            //alert("qty");
             event.preventDefault();
-            return false;
+        }else {
+            if (!checkInp(x[i])){
+                x[i].style.border = "1px solid rgba(255, 0, 0, 0.7)"
+                valid2 = false;
+                event.preventDefault();
+            } else {
+                x[i].style.border = "1px solid #000"
+              }
+        }
+    }
+    if (!valid & !valid2) {
+        document.getElementById("answer_acc_qty").innerHTML = "Introdu cantitatea! / Introdu numar intreg!";
+    } else {
+        if (!valid) {
+            document.getElementById("answer_acc_qty").innerHTML = "Introdu cantitatea!";
+        } else {
+            if (!valid2) {
+                document.getElementById("answer_acc_qty").innerHTML = "Introdu numar intreg!";
+            } else {
+                document.getElementById("answer_acc_qty").innerHTML = "";
+              }
         }
     }
 }
