@@ -390,7 +390,7 @@ try:
 
     def search_ord(s1, s2, s3, s4):
         c = conn.cursor()
-        query = '''select
+        query = '''select distinct on (oi.id)
                         concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) as ord_name,
                         s.supplier,
                         to_char (oi.created_at, 'DD-MM-YYYY'),
@@ -410,7 +410,7 @@ try:
                         or a.description ilike any (%s)
                         or s.supplier ilike any (%s)
                         or concat(to_char (oi.created_at, 'YY'), '-', to_char(oi.id, 'fm0000')) ilike any (%s)
-                    order by o.id;
+                    order by oi.id;
                    '''
 
         c.execute(query, (s1, s2, s3, s4,))
